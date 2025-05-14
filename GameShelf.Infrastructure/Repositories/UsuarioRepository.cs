@@ -31,6 +31,7 @@ namespace GameShelf.Infrastructure.Repositories
                 .Where(usuario => usuario.Id == id)
                 .Select(usuario => (T)(object)new UsuarioSimplificadoDTO()
                 {
+                    Id = usuario.Id,
                     Nome = usuario.Nome,
                     Sobrenome = usuario.Sobrenome,
                     Email = usuario.Email,
@@ -51,7 +52,7 @@ namespace GameShelf.Infrastructure.Repositories
                     (
 
                         string.IsNullOrEmpty(query.Nome)
-                        || $"{usuario.Nome} {usuario.Sobrenome}".Contains(query.Nome)
+                        || (usuario.Nome + " " + usuario.Sobrenome).Contains(query.Nome)
 
                     )
                     && (
@@ -86,7 +87,7 @@ namespace GameShelf.Infrastructure.Repositories
                     DataDesativacao = usuario.DataDesativacao
                 });
 
-            return (Response)(object)await GetPaginated<UsuarioListagemDTO, PaginatedResultDTO<UsuarioListagemDTO>>(queryListagemUsuarios, query.PaginaAtual, query.Skip, query.Quantidade);
+            return (Response)(object)await GetPaginated<UsuarioListagemDTO, PaginatedResultDTO<UsuarioListagemDTO>>(queryListagemUsuarios, query.PaginaAtual, query.Quantidade);
 
         }
 

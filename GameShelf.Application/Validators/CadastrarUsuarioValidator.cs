@@ -45,6 +45,11 @@ namespace GameShelf.Application.Validators
         private async Task<bool> EmailValido(string email)
         {
 
+            if (string.IsNullOrEmpty(email))
+            {
+                return false;
+            }
+
             return !await _usuarioRepository
                 .Exists(usuario => usuario.Email == email);
 
@@ -52,8 +57,15 @@ namespace GameShelf.Application.Validators
 
         private bool SenhaFormatoValido(string senha)
         {
+
+            if (string.IsNullOrEmpty(senha))
+            {
+                return false;
+            }
+
             Regex regexPadraoSenha = new Regex(@"^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{6,}$");
             return regexPadraoSenha.IsMatch(senha);
+
         }
 
     }

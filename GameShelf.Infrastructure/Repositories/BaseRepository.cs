@@ -81,11 +81,13 @@ namespace GameShelf.Infrastructure.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<PaginatedResult> GetPaginated<Projecao, PaginatedResult>(IQueryable<Projecao> query, int paginaAtual, int skip, int take)
+        public async Task<PaginatedResult> GetPaginated<Projecao, PaginatedResult>(IQueryable<Projecao> query, int paginaAtual, int take)
         {
 
             int quantidadeTotal = await query
                 .CountAsync();
+
+            int skip = (paginaAtual - 1) * take;
 
             var paginacao = await query
                 .Skip(skip)

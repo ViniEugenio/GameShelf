@@ -13,5 +13,6 @@
         public readonly static string IdVazio = "Por favor informe o id do usuário";
         public readonly static string UsuarioNaoEncontrado = "O usuário informado não foi encontrado";
         public readonly static string ErroInativacao = "Não foi possível desativar esse usuário, ele não foi encontrado ou já está inativo";
+        public readonly static string LoginInvalido = "Email e/ou senha inválidos";
     }
 }

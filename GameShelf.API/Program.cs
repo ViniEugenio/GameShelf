@@ -11,6 +11,7 @@ services.ConfigureMediatR();
 services.ConfigureApplicationServices();
 services.ConfigureRepositories();
 services.ConfigureIdentity();
+services.ConfigureMapster();
 
 var app = builder.Build();
 

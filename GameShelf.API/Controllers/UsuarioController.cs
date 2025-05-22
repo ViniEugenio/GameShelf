@@ -1,6 +1,7 @@
 ﻿using GameShelf.Application.Commands.AlterarUsuario;
 using GameShelf.Application.Commands.CadastrarUsuario;
 using GameShelf.Application.Commands.DesativarUsuario;
+using GameShelf.Application.Commands.Login;
 using GameShelf.Application.Queries.GetListagemUsuarios;
 using GameShelf.Application.Queries.GetUsuario;
 using MediatR;
@@ -45,6 +46,12 @@ namespace GameShelf.API.Controllers
         public async Task<IActionResult> GetListagemUsuarios([FromQuery] GetListagemUsuariosQuery query)
         {
             return await Respond(query);
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginCommand command)
+        {
+            return await Respond(command);
         }
 
     }

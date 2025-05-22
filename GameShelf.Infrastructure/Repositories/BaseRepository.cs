@@ -1,4 +1,5 @@
 ﻿using GameShelf.Application.DTOs;
+using GameShelf.Domain.Projections;
 using GameShelf.Domain.RepositoriesInterfaces;
 using GameShelf.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ namespace GameShelf.Infrastructure.Repositories
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     {
 
-        private readonly Context _context;
+        protected readonly Context _context;
         protected readonly DbSet<T> _dbSet;
 
         protected BaseRepository(Context context)
@@ -81,7 +82,7 @@ namespace GameShelf.Infrastructure.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<PaginatedResult> GetPaginated<Projecao, PaginatedResult>(IQueryable<Projecao> query, int paginaAtual, int take)
+        public async Task<PaginatedProjection<T>> GetPaginated<T>(IQueryable<T> query, int paginaAtual, int take)
         {
 
             int quantidadeTotal = await query
@@ -94,13 +95,7 @@ namespace GameShelf.Infrastructure.Repositories
                 .Take(take)
                 .ToListAsync();
 
-            return (PaginatedResult)(object)new PaginatedResultDTO<Projecao>()
-            {
-                Listagem = paginacao,
-                PaginaAtual = paginaAtual,
-                QuantidadePorPagina = take,
-                QuantidadeTotal = quantidadeTotal
-            };
+            return new PaginatedProjection<T>(quantidadeTotal, paginacao);
 
         }
 

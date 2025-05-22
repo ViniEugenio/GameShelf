@@ -1,7 +1,6 @@
-﻿namespace GameShelf.Application.DTOs.UsuarioDTO
+﻿namespace GameShelf.Domain.Projections.User
 {
-
-    public class UsuarioListagemDTO
+    public class UsuarioPaginacaoProjection
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
@@ -11,5 +10,4 @@
         public DateTime? DataDesativacao { get; set; }
         public DateTime? DataAlteracao { get; set; }
     }
-
 }

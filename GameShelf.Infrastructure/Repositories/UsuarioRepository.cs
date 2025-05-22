@@ -1,11 +1,12 @@
-﻿using GameShelf.Application.DTOs;
-using GameShelf.Application.DTOs.UsuarioDTO;
-using GameShelf.Application.Queries.GetListagemUsuarios;
-using GameShelf.Domain.Entities;
+﻿using GameShelf.Domain.Entities;
+using GameShelf.Domain.Projections;
+using GameShelf.Domain.Projections.User;
 using GameShelf.Domain.RepositoriesInterfaces;
 using GameShelf.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace GameShelf.Infrastructure.Repositories
 {
@@ -13,10 +14,12 @@ namespace GameShelf.Infrastructure.Repositories
     {
 
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public UsuarioRepository(Context context, UserManager<User> userManager) : base(context)
+        public UsuarioRepository(Context context, UserManager<User> userManager, SignInManager<User> signInManager) : base(context)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<IdentityResult> CadastrarUsuario(User user, string password)
@@ -24,12 +27,12 @@ namespace GameShelf.Infrastructure.Repositories
             return await _userManager.CreateAsync(user, password);
         }
 
-        public async Task<T> GetUsuarioSimplificado<T>(Guid id)
+        public async Task<UsuarioSimplificadoProjection> GetUsuarioSimplificado(Guid id)
         {
 
             return await _dbSet
                 .Where(usuario => usuario.Id == id)
-                .Select(usuario => (T)(object)new UsuarioSimplificadoDTO()
+                .Select(usuario => new UsuarioSimplificadoProjection()
                 {
                     Id = usuario.Id,
                     Nome = usuario.Nome,
@@ -41,44 +44,14 @@ namespace GameShelf.Infrastructure.Repositories
 
         }
 
-        public async Task<Response> GetUsuarioPaginados<Response, Filtro>(Filtro filtro)
+        public async Task<PaginatedProjection<UsuarioPaginacaoProjection>> GetUsuarioPaginados(Expression<Func<User, bool>> predicates, int paginaAtual, int quantidade)
         {
 
-            GetListagemUsuariosQuery query = filtro as GetListagemUsuariosQuery;
-
             var queryListagemUsuarios = _dbSet
-                .Where(usuario =>
-
-                    (
-
-                        string.IsNullOrEmpty(query.Nome)
-                        || (usuario.Nome + " " + usuario.Sobrenome).Contains(query.Nome)
-
-                    )
-                    && (
-
-                        string.IsNullOrEmpty(query.Email)
-                        || usuario.Email.Contains(query.Email)
-
-                    )
-                    && (
-
-                        query.DataAtivacaoInicio == null
-                        || usuario.DataAtivacao >= query.DataAtivacaoInicio
-
-                    )
-                    && (
-
-                        query.DataAtivacaoFim == null
-                        || usuario.DataAtivacao <= query.DataAtivacaoFim
-
-                    )
-
-                    && usuario.Ativo == query.Ativo
-
-                )
-                .Select(usuario => new UsuarioListagemDTO()
+                .Where(predicates)
+                .Select(usuario => new UsuarioPaginacaoProjection()
                 {
+                    Id = usuario.Id,
                     Nome = $"{usuario.Nome} {usuario.Sobrenome}",
                     Email = usuario.Email,
                     Ativo = usuario.Ativo,
@@ -87,7 +60,33 @@ namespace GameShelf.Infrastructure.Repositories
                     DataDesativacao = usuario.DataDesativacao
                 });
 
-            return (Response)(object)await GetPaginated<UsuarioListagemDTO, PaginatedResultDTO<UsuarioListagemDTO>>(queryListagemUsuarios, query.PaginaAtual, query.Quantidade);
+            return await GetPaginated(queryListagemUsuarios, paginaAtual, quantidade);
+
+        }
+
+        public async Task<SignInResult> Login(string email, string password)
+        {
+            return await _signInManager.PasswordSignInAsync(email, password, false, false);
+        }
+
+        public async Task<LoginProjection> GetInformacoesLoginUsuario(string email)
+        {
+
+            User usuario = await _userManager
+                .FindByEmailAsync(email);
+
+            List<Claim> claims = [.. await _userManager.GetClaimsAsync(usuario)];
+            claims.Add(new Claim(ClaimTypes.Name, email));
+
+            return new LoginProjection()
+            {
+                Claims = new(claims),
+                Usuario = new()
+                {
+                    Nome = $"{usuario.Nome} {usuario.Sobrenome}",
+                    Email = usuario.Email
+                }
+            };
 
         }
 

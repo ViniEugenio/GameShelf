@@ -1,5 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿using GameShelf.Domain.Projections;
 using Microsoft.EntityFrameworkCore.Query;
+using System.Linq.Expressions;
 
 namespace GameShelf.Domain.RepositoriesInterfaces
 {
@@ -12,6 +13,6 @@ namespace GameShelf.Domain.RepositoriesInterfaces
         Task Save();
         Task<bool> Exists(Expression<Func<T, bool>> condicoes);
         Task<T> GetById(Guid id);
-        Task<PaginatedResult> GetPaginated<Projecao, PaginatedResult>(IQueryable<Projecao> query, int paginaAtual, int take);
+        Task<PaginatedProjection<T>> GetPaginated<T>(IQueryable<T> query, int paginaAtual, int take);
     }
 }

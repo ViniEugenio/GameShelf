@@ -1,8 +1,8 @@
 ﻿using GameShelf.Domain.Entities;
 
-namespace GameShelf.Application.Commands.AutoMapper
+namespace GameShelf.Application.Extensions.EntitiesExtensions
 {
-    public static class BaseEntityAutoMapper
+    public static class BaseEntityExtensions
     {
 
         public static void DesativarEntidade(this BaseEntity entity)

@@ -1,9 +1,9 @@
 ﻿using GameShelf.Application.Commands.AlterarUsuario;
 using GameShelf.Domain.Entities;
 
-namespace GameShelf.Application.Commands.AutoMapper
+namespace GameShelf.Application.Extensions.EntitiesExtensions
 {
-    public static class UsuarioAutoMapper
+    public static class UsuarioExtensions
     {
 
         public static void AtualizarUsuario(this User usuarioParaAlteracao, AlterarUsuarioCommand command)

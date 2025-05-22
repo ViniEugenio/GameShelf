@@ -9,6 +9,7 @@ namespace GameShelf.API.Configurations
         public static void ConfigureApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
 
     }

@@ -14,5 +14,6 @@ namespace GameShelf.Domain.RepositoriesInterfaces
         Task<bool> Exists(Expression<Func<T, bool>> condicoes);
         Task<T> GetById(Guid id);
         Task<PaginatedProjection<T>> GetPaginated<T>(IQueryable<T> query, int paginaAtual, int take);
+        Task<int> Count(Expression<Func<T, bool>> condicoes);
     }
 }

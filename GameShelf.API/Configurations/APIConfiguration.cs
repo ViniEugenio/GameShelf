@@ -11,6 +11,7 @@
         public static void ConfigureWebApplication(this WebApplication webApplication)
         {
             webApplication.UseHttpsRedirection();
+            webApplication.UseAuthentication();
             webApplication.UseAuthorization();
             webApplication.MapControllers();
             webApplication.Run();

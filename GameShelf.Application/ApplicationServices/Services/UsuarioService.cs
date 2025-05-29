@@ -12,13 +12,14 @@ using GameShelf.Application.Queries.GetUsuario;
 using GameShelf.Application.Validators;
 using GameShelf.Application.Validators.ErrorMessages;
 using GameShelf.Domain.Entities;
+using GameShelf.Domain.Enums;
 using GameShelf.Domain.Projections;
 using GameShelf.Domain.Projections.User;
 using GameShelf.Domain.RepositoriesInterfaces;
+using GameShelf.Domain.Security;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using System.Linq.Expressions;
-using System.Security.Claims;
 
 namespace GameShelf.Application.ApplicationServices.Services
 {
@@ -62,8 +63,13 @@ namespace GameShelf.Application.ApplicationServices.Services
 
             if (!result.Succeeded)
             {
+
                 response.AdicionarErros(result);
+                return response;
+
             }
+
+            await AplicarClaimsNovoUsuario(user);
 
             return response;
 
@@ -242,6 +248,28 @@ namespace GameShelf.Application.ApplicationServices.Services
             response.AddData(loginDTO);
 
             return response;
+        }
+
+        private async Task AplicarClaimsNovoUsuario(User user)
+        {
+
+            bool primeiroUsuario = (await _usuarioRepository
+                .Count(usuario => usuario.Ativo)) == 1;
+
+            Dictionary<string, EClaimPermissions> claims = [];
+            if (primeiroUsuario)
+            {
+
+                claims
+                    .Add(ClaimsManager.Admin, EClaimPermissions.Create | EClaimPermissions.Read | EClaimPermissions.Update | EClaimPermissions.Delete);
+
+            }
+
+            claims
+                .Add(ClaimsManager.User, EClaimPermissions.Create | EClaimPermissions.Read | EClaimPermissions.Update | EClaimPermissions.Delete);
+
+            await _usuarioRepository.AdicionarClaims(user, claims);
+
         }
 
     }

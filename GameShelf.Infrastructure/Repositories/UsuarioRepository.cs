@@ -1,4 +1,5 @@
 ﻿using GameShelf.Domain.Entities;
+using GameShelf.Domain.Enums;
 using GameShelf.Domain.Projections;
 using GameShelf.Domain.Projections.User;
 using GameShelf.Domain.RepositoriesInterfaces;
@@ -87,6 +88,16 @@ namespace GameShelf.Infrastructure.Repositories
                     Email = usuario.Email
                 }
             };
+
+        }
+
+        public async Task AdicionarClaims(User user, Dictionary<string, EClaimPermissions> claims)
+        {
+
+            List<Claim> claimsFormatadas = [..claims
+                .Select(claim => new Claim(claim.Key, Convert.ToInt32(claim.Value).ToString()))];
+
+            await _userManager.AddClaimsAsync(user, claimsFormatadas);
 
         }
 

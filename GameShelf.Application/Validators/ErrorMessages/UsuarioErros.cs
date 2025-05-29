@@ -14,5 +14,7 @@
         public readonly static string UsuarioNaoEncontrado = "O usuário informado não foi encontrado";
         public readonly static string ErroInativacao = "Não foi possível desativar esse usuário, ele não foi encontrado ou já está inativo";
         public readonly static string LoginInvalido = "Email e/ou senha inválidos";
+        public readonly static string UsuarioNaoLogado = "Por favor faça seu login e tente novamente!";
+        public readonly static string AcessoNegado = "Você não possuí permissao para realizar essa ação!";
     }
 }

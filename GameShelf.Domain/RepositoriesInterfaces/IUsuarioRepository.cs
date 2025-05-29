@@ -1,9 +1,9 @@
 ﻿using GameShelf.Domain.Entities;
+using GameShelf.Domain.Enums;
 using GameShelf.Domain.Projections;
 using GameShelf.Domain.Projections.User;
 using Microsoft.AspNetCore.Identity;
 using System.Linq.Expressions;
-using System.Security.Claims;
 
 namespace GameShelf.Domain.RepositoriesInterfaces
 {
@@ -14,5 +14,6 @@ namespace GameShelf.Domain.RepositoriesInterfaces
         Task<PaginatedProjection<UsuarioPaginacaoProjection>> GetUsuarioPaginados(Expression<Func<User, bool>> predicates, int paginaAtual, int quantidade);
         Task<SignInResult> Login(string email, string password);
         Task<LoginProjection> GetInformacoesLoginUsuario(string email);
+        Task AdicionarClaims(User user, Dictionary<string, EClaimPermissions> claims);
     }
 }

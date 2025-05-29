@@ -1,5 +1,4 @@
-﻿using GameShelf.Application.DTOs;
-using GameShelf.Domain.Projections;
+﻿using GameShelf.Domain.Projections;
 using GameShelf.Domain.RepositoriesInterfaces;
 using GameShelf.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -96,6 +95,14 @@ namespace GameShelf.Infrastructure.Repositories
                 .ToListAsync();
 
             return new PaginatedProjection<T>(quantidadeTotal, paginacao);
+
+        }
+
+        public async Task<int> Count(Expression<Func<T, bool>> condicoes)
+        {
+
+            return await _dbSet
+                .CountAsync(condicoes);
 
         }
 

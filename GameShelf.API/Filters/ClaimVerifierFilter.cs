@@ -57,8 +57,14 @@ namespace GameShelf.API.Filters
                 .Claims
                 .Any(claim =>
 
-                    claim.Type == _claim
-                    && ((EClaimPermissions)Convert.ToInt32(claim.Value)).HasFlag(_permissao)
+                    claim.Type == ClaimsManager.Admin
+
+                    || (
+
+                        claim.Type == _claim
+                        && ((EClaimPermissions)Convert.ToInt32(claim.Value)).HasFlag(_permissao)
+
+                    )
 
                 );
 

@@ -7,6 +7,7 @@ using GameShelf.Application.Commands.Login;
 using GameShelf.Application.DTOs;
 using GameShelf.Application.DTOs.UsuarioDTO;
 using GameShelf.Application.Extensions.EntitiesExtensions;
+using GameShelf.Application.Queries.GetListagemClaimsUsuarios;
 using GameShelf.Application.Queries.GetListagemUsuarios;
 using GameShelf.Application.Queries.GetUsuario;
 using GameShelf.Application.Validators;
@@ -269,6 +270,51 @@ namespace GameShelf.Application.ApplicationServices.Services
                 .Add(ClaimsManager.User, EClaimPermissions.Create | EClaimPermissions.Read | EClaimPermissions.Update | EClaimPermissions.Delete);
 
             await _usuarioRepository.AdicionarClaims(user, claims);
+
+        }
+
+        public async Task<ResponseDTO> GetListagemClaimsUsuarios(GetListagemClaimsUsuariosQuery query)
+        {
+
+            ResponseDTO response = new();
+
+            PaginacaoValidator validator = new();
+            ValidationResult validationResult = validator.Validate(query);
+
+            if (!validationResult.IsValid)
+            {
+
+                response.AdicionarErros(validationResult);
+                return response;
+
+            }
+
+            PaginatedProjection<UsuarioClaimsProjection> projection = await _usuarioRepository
+                .GetUsuariosClaimsPaginados(query.Adapt<UsuarioClaimFilterProjection>());
+
+            List<UsuarioClaimsDTO> data = [..
+
+                projection
+                    .Listagem
+                    .Select(usuario => new UsuarioClaimsDTO()
+                    {
+                        Id = usuario.Id,
+                        Nome = usuario.Nome,
+                        Email = usuario.Email,
+                        Permissoes = [..
+
+                            usuario
+                            .Claims
+                            .Select(claim => new PermissoesDTO(claim.Type, (EClaimPermissions)Convert.ToInt32(claim.Value)))
+
+                        ]
+                    })
+
+            ];
+
+            response.AddData(data);
+
+            return response;
 
         }
 

@@ -48,7 +48,7 @@ namespace GameShelf.Infrastructure.Repositories
         public async Task<PaginatedProjection<UsuarioPaginacaoProjection>> GetUsuarioPaginados(Expression<Func<User, bool>> predicates, int paginaAtual, int quantidade)
         {
 
-            var queryListagemUsuarios = _dbSet
+            IQueryable<UsuarioPaginacaoProjection> queryListagemUsuarios = _dbSet
                 .Where(predicates)
                 .Select(usuario => new UsuarioPaginacaoProjection()
                 {
@@ -98,6 +98,86 @@ namespace GameShelf.Infrastructure.Repositories
                 .Select(claim => new Claim(claim.Key, Convert.ToInt32(claim.Value).ToString()))];
 
             await _userManager.AddClaimsAsync(user, claimsFormatadas);
+
+        }
+
+        public async Task<PaginatedProjection<UsuarioClaimsProjection>> GetUsuariosClaimsPaginados(UsuarioClaimFilterProjection filtro)
+        {
+
+            IQueryable<UsuarioClaimsProjection> query = _dbSet
+                .Join(
+
+                    _context
+                        .UserClaims
+                        .Where(claim =>
+
+                            filtro.ClaimsTypes.Count == 0
+                            || filtro.ClaimsTypes.Contains(claim.ClaimType)
+
+                        )
+                        .AsNoTracking(),
+
+                    usuario => usuario.Id,
+                    claim => claim.UserId,
+                    (usuario, claim) => new
+                    {
+                        usuario,
+                        Claim = claim.ToClaim()
+                    }
+
+                )
+                .GroupBy(join => new
+                {
+                    join.usuario.Id,
+                    Nome = join.usuario.Nome + " " + join.usuario.Sobrenome,
+                    join.usuario.Email,
+                    join.usuario.DataAtivacao,
+                    join.usuario.Ativo
+                })
+                .Where(agrupamento =>
+
+                    (
+
+                        string.IsNullOrEmpty(filtro.Nome)
+                        || agrupamento.Key.Nome.Contains(filtro.Nome)
+
+                    )
+
+                    && (
+
+                        string.IsNullOrEmpty(filtro.Email)
+                        || agrupamento.Key.Email.Contains(filtro.Email)
+
+                    )
+
+                    && (
+
+                        filtro.DataAtivacaoInicio == null
+                        || agrupamento.Key.DataAtivacao >= filtro.DataAtivacaoInicio
+
+                    )
+
+                    && (
+
+                        filtro.DataAtivacaoFim == null
+                        || agrupamento.Key.DataAtivacao <= filtro.DataAtivacaoFim
+
+                    )
+
+                    && agrupamento.Key.Ativo
+
+                )
+                .Select(agrupamento => new UsuarioClaimsProjection()
+                {
+                    Id = agrupamento.Key.Id,
+                    Nome = agrupamento.Key.Nome,
+                    Email = agrupamento.Key.Email,
+                    Claims = agrupamento
+                        .Select(join => join.Claim)
+                        .ToList()
+                });
+
+            return await GetPaginated(query, filtro.PaginaAtual, filtro.Quantidade);
 
         }
 

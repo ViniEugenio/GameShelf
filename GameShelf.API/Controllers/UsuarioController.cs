@@ -48,14 +48,14 @@ namespace GameShelf.API.Controllers
         }
 
         [HttpPatch("DesativarUsuario")]
-        [ClaimAuthorize(ClaimsManager.Admin, EClaimPermissions.Delete)]
+        [ClaimAuthorize(ClaimsManager.UserAdmin, EClaimPermissions.Delete)]
         public async Task<IActionResult> DesativarUsuario([FromBody] DesativarUsuarioCommand command)
         {
             return await Respond(command);
         }
 
         [HttpGet("GetListagemUsuarios")]
-        [ClaimAuthorize(ClaimsManager.Admin, EClaimPermissions.Read)]
+        [ClaimAuthorize(ClaimsManager.UserAdmin, EClaimPermissions.Read)]
         public async Task<IActionResult> GetListagemUsuarios([FromQuery] GetListagemUsuariosQuery query)
         {
             return await Respond(query);

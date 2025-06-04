@@ -14,13 +14,13 @@ using GameShelf.Application.Validators;
 using GameShelf.Application.Validators.ErrorMessages;
 using GameShelf.Domain.Entities;
 using GameShelf.Domain.Enums;
+using GameShelf.Domain.Filters.User;
 using GameShelf.Domain.Projections;
 using GameShelf.Domain.Projections.User;
 using GameShelf.Domain.RepositoriesInterfaces;
 using GameShelf.Domain.Security;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
-using System.Linq.Expressions;
 
 namespace GameShelf.Application.ApplicationServices.Services
 {
@@ -167,37 +167,10 @@ namespace GameShelf.Application.ApplicationServices.Services
 
             }
 
-            Expression<Func<User, bool>> predicates = usuario => (
-
-                string.IsNullOrEmpty(query.Nome)
-                || (usuario.Nome + " " + usuario.Sobrenome).Contains(query.Nome)
-
-            )
-
-            && (
-
-                string.IsNullOrEmpty(query.Email)
-                || usuario.Email.Contains(query.Email)
-
-            )
-
-            && (
-
-                query.DataAtivacaoInicio == null
-                || usuario.DataAtivacao >= query.DataAtivacaoInicio
-
-            )
-            && (
-
-                query.DataAtivacaoFim == null
-                || usuario.DataAtivacao <= query.DataAtivacaoFim
-
-            )
-
-            && usuario.Ativo == query.Ativo;
+            GetListagemUsuariosFilter filtro = query.Adapt<GetListagemUsuariosFilter>();
 
             PaginatedProjection<UsuarioPaginacaoProjection> projection = await _usuarioRepository
-                .GetUsuarioPaginados(predicates, query.PaginaAtual, query.Quantidade);
+                .GetUsuarioPaginados(filtro);
 
             PaginatedResultDTO<UsuarioListagemDTO> paginacao = new()
             {
@@ -289,8 +262,10 @@ namespace GameShelf.Application.ApplicationServices.Services
 
             }
 
+            GetListagemClaimsUsuariosFilter filtro = query.Adapt<GetListagemClaimsUsuariosFilter>();
+
             PaginatedProjection<UsuarioClaimsProjection> projection = await _usuarioRepository
-                .GetUsuariosClaimsPaginados(query.Adapt<UsuarioClaimFilterProjection>());
+                .GetUsuariosClaimsPaginados(filtro);
 
             List<UsuarioClaimsDTO> data = [..
 
@@ -305,7 +280,7 @@ namespace GameShelf.Application.ApplicationServices.Services
 
                             usuario
                             .Claims
-                            .Select(claim => new PermissoesDTO(claim.Type, (EClaimPermissions)Convert.ToInt32(claim.Value)))
+                            .Select(claim => new PermissoesDTO(claim))
 
                         ]
                     })

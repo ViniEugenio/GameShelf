@@ -1,12 +1,13 @@
 ﻿using GameShelf.Domain.Entities;
 using GameShelf.Domain.Enums;
+using GameShelf.Domain.Filters.User;
 using GameShelf.Domain.Projections;
 using GameShelf.Domain.Projections.User;
 using GameShelf.Domain.RepositoriesInterfaces;
+using GameShelf.Domain.Security;
 using GameShelf.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 using System.Security.Claims;
 
 namespace GameShelf.Infrastructure.Repositories
@@ -45,11 +46,40 @@ namespace GameShelf.Infrastructure.Repositories
 
         }
 
-        public async Task<PaginatedProjection<UsuarioPaginacaoProjection>> GetUsuarioPaginados(Expression<Func<User, bool>> predicates, int paginaAtual, int quantidade)
+        public async Task<PaginatedProjection<UsuarioPaginacaoProjection>> GetUsuarioPaginados(GetListagemUsuariosFilter filtro)
         {
 
             IQueryable<UsuarioPaginacaoProjection> queryListagemUsuarios = _dbSet
-                .Where(predicates)
+                .Where(usuario => (
+
+                        string.IsNullOrEmpty(filtro.Nome)
+                        || (usuario.Nome + " " + usuario.Sobrenome).Contains(filtro.Nome)
+
+                    )
+
+                    && (
+
+                        string.IsNullOrEmpty(filtro.Email)
+                        || usuario.Email.Contains(filtro.Email)
+
+                    )
+
+                    && (
+
+                        filtro.DataAtivacaoInicio == null
+                        || usuario.DataAtivacao >= filtro.DataAtivacaoInicio
+
+                    )
+                    && (
+
+                        filtro.DataAtivacaoFim == null
+                        || usuario.DataAtivacao <= filtro.DataAtivacaoFim
+
+                    )
+
+                    && usuario.Ativo == filtro.Ativo
+
+                )
                 .Select(usuario => new UsuarioPaginacaoProjection()
                 {
                     Id = usuario.Id,
@@ -61,7 +91,7 @@ namespace GameShelf.Infrastructure.Repositories
                     DataDesativacao = usuario.DataDesativacao
                 });
 
-            return await GetPaginated(queryListagemUsuarios, paginaAtual, quantidade);
+            return await GetPaginated(queryListagemUsuarios, filtro.PaginaAtual, filtro.Quantidade);
 
         }
 
@@ -101,7 +131,7 @@ namespace GameShelf.Infrastructure.Repositories
 
         }
 
-        public async Task<PaginatedProjection<UsuarioClaimsProjection>> GetUsuariosClaimsPaginados(UsuarioClaimFilterProjection filtro)
+        public async Task<PaginatedProjection<UsuarioClaimsProjection>> GetUsuariosClaimsPaginados(GetListagemClaimsUsuariosFilter filtro)
         {
 
             IQueryable<UsuarioClaimsProjection> query = _dbSet
@@ -111,8 +141,12 @@ namespace GameShelf.Infrastructure.Repositories
                         .UserClaims
                         .Where(claim =>
 
-                            filtro.ClaimsTypes.Count == 0
-                            || filtro.ClaimsTypes.Contains(claim.ClaimType)
+                            (
+                                filtro.ClaimsTypes.Count == 0
+                                || filtro.ClaimsTypes.Contains(claim.ClaimType)
+                            )
+
+                            && claim.ClaimType != ClaimsManager.User
 
                         )
                         .AsNoTracking(),
@@ -122,7 +156,7 @@ namespace GameShelf.Infrastructure.Repositories
                     (usuario, claim) => new
                     {
                         usuario,
-                        Claim = claim.ToClaim()
+                        claim
                     }
 
                 )
@@ -173,7 +207,12 @@ namespace GameShelf.Infrastructure.Repositories
                     Nome = agrupamento.Key.Nome,
                     Email = agrupamento.Key.Email,
                     Claims = agrupamento
-                        .Select(join => join.Claim)
+                        .Select(join => new ClaimProjection()
+                        {
+                            Id = join.claim.Id,
+                            Type = join.claim.ClaimType,
+                            Value = Convert.ToInt32(join.claim.ClaimValue)
+                        })
                         .ToList()
                 });
 

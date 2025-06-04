@@ -3,6 +3,7 @@ using GameShelf.Application.Commands.AlterarUsuario;
 using GameShelf.Application.Commands.CadastrarUsuario;
 using GameShelf.Application.Commands.DesativarUsuario;
 using GameShelf.Application.Commands.Login;
+using GameShelf.Application.Queries.GetListagemClaimsUsuarios;
 using GameShelf.Application.Queries.GetListagemUsuarios;
 using GameShelf.Application.Queries.GetUsuario;
 using GameShelf.Domain.Enums;
@@ -57,6 +58,13 @@ namespace GameShelf.API.Controllers
         [HttpGet("GetListagemUsuarios")]
         [ClaimAuthorize(ClaimsManager.UserAdmin, EClaimPermissions.Read)]
         public async Task<IActionResult> GetListagemUsuarios([FromQuery] GetListagemUsuariosQuery query)
+        {
+            return await Respond(query);
+        }
+
+        [HttpGet("GetListagemClaimsUsuarios")]
+        [ClaimAuthorize(ClaimsManager.UserAdmin, EClaimPermissions.Read)]
+        public async Task<IActionResult> GetListagemClaimsUsuarios([FromQuery] GetListagemClaimsUsuariosQuery query)
         {
             return await Respond(query);
         }

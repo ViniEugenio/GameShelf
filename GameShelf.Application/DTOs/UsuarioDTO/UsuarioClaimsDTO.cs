@@ -1,4 +1,6 @@
 ﻿using GameShelf.Domain.Enums;
+using GameShelf.Domain.Projections.User;
+using GameShelf.Domain.Security;
 
 namespace GameShelf.Application.DTOs.UsuarioDTO
 {
@@ -13,16 +15,20 @@ namespace GameShelf.Application.DTOs.UsuarioDTO
     public class PermissoesDTO
     {
 
+        public int Id { get; set; }
         public string Claim { get; set; }
         public bool Create { get; set; }
         public bool Read { get; set; }
         public bool Update { get; set; }
         public bool Delete { get; set; }
 
-        public PermissoesDTO(string claim, EClaimPermissions permissoes)
+        public PermissoesDTO(ClaimProjection claim)
         {
 
-            Claim = claim;
+            Id = claim.Id;
+            Claim = ClaimsManager.ClaimsDescription[claim.Type];
+
+            EClaimPermissions permissoes = (EClaimPermissions)claim.Value;
 
             Create = permissoes.HasFlag(EClaimPermissions.Create);
             Read = permissoes.HasFlag(EClaimPermissions.Read);

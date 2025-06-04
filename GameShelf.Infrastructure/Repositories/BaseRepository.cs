@@ -87,6 +87,11 @@ namespace GameShelf.Infrastructure.Repositories
             int quantidadeTotal = await query
                 .CountAsync();
 
+            if (quantidadeTotal == 0)
+            {
+                return new PaginatedProjection<T>(quantidadeTotal, []);
+            }
+
             int skip = (paginaAtual - 1) * take;
 
             var paginacao = await query

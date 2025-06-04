@@ -14,9 +14,9 @@ namespace GameShelf.Application.Queries.GetListagemClaimsUsuarios
             _usuarioService = usuarioService;
         }
 
-        public Task<ResponseDTO> Handle(GetListagemClaimsUsuariosQuery request, CancellationToken cancellationToken)
+        public async Task<ResponseDTO> Handle(GetListagemClaimsUsuariosQuery request, CancellationToken cancellationToken)
         {
-            
+            return await _usuarioService.GetListagemClaimsUsuarios(request);
         }
     }
 }

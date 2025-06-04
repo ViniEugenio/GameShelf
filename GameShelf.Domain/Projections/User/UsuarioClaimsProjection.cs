@@ -1,21 +1,18 @@
-﻿using System.Security.Claims;
-
-namespace GameShelf.Domain.Projections.User
+﻿namespace GameShelf.Domain.Projections.User
 {
     public class UsuarioClaimsProjection
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
-        public List<Claim> Claims { get; set; } = [];
+        public List<ClaimProjection> Claims { get; set; } = [];
     }
 
-    public class UsuarioClaimFilterProjection : PaginatedFilterBaseProjection
+    public class ClaimProjection
     {
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public DateTime? DataAtivacaoInicio { get; set; }
-        public DateTime? DataAtivacaoFim { get; set; }
-        public List<string> ClaimsTypes { get; set; }
+        public int Id { get; set; }
+        public string Type { get; set; }
+        public int Value { get; set; }
     }
+
 }

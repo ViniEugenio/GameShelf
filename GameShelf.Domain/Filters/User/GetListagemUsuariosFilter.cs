@@ -1,11 +1,11 @@
-﻿namespace GameShelf.Application.Queries.GetListagemClaimsUsuarios
+﻿namespace GameShelf.Domain.Filters.User
 {
-    public class GetListagemClaimsUsuariosQuery : PaginatedQueryBase
+    public class GetListagemUsuariosFilter : PaginatedFilterBase
     {
         public string Nome { get; set; }
         public string Email { get; set; }
+        public bool Ativo { get; set; } = true;
         public DateTime? DataAtivacaoInicio { get; set; }
         public DateTime? DataAtivacaoFim { get; set; }
-        public List<string> ClaimTypes { get; set; } = [];
     }
 }

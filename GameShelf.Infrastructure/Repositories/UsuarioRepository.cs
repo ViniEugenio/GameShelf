@@ -114,6 +114,7 @@ namespace GameShelf.Infrastructure.Repositories
                 Claims = new(claims),
                 Usuario = new()
                 {
+                    Id = usuario.Id,
                     Nome = $"{usuario.Nome} {usuario.Sobrenome}",
                     Email = usuario.Email
                 }
@@ -141,12 +142,8 @@ namespace GameShelf.Infrastructure.Repositories
                         .UserClaims
                         .Where(claim =>
 
-                            (
-                                filtro.ClaimsTypes.Count == 0
-                                || filtro.ClaimsTypes.Contains(claim.ClaimType)
-                            )
-
-                            && claim.ClaimType != ClaimsManager.User
+                            filtro.ClaimsTypes.Count == 0
+                            || filtro.ClaimsTypes.Contains(claim.ClaimType)
 
                         )
                         .AsNoTracking(),

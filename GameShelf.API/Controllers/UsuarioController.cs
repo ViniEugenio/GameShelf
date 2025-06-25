@@ -1,4 +1,4 @@
-﻿using GameShelf.API.Filters;
+﻿using GameShelf.API.Filters.AuthorizationFilters;
 using GameShelf.Application.Commands.AlterarUsuario;
 using GameShelf.Application.Commands.CadastrarUsuario;
 using GameShelf.Application.Commands.DesativarUsuario;
@@ -9,6 +9,7 @@ using GameShelf.Application.Queries.GetUsuario;
 using GameShelf.Domain.Enums;
 using GameShelf.Domain.Security;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameShelf.API.Controllers
@@ -35,14 +36,14 @@ namespace GameShelf.API.Controllers
         }
 
         [HttpPut]
-        [ClaimAuthorize(ClaimsManager.User, EClaimPermissions.Update)]
+        [Authorize]
         public async Task<IActionResult> AlterarUsuario([FromBody] AlterarUsuarioCommand command)
         {
             return await Respond(command);
         }
 
         [HttpGet]
-        [ClaimAuthorize(ClaimsManager.User, EClaimPermissions.Read)]
+        [Authorize]
         public async Task<IActionResult> GetUsuario([FromQuery] GetUsuarioQuery query)
         {
             return await Respond(query);

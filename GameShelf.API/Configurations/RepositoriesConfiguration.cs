@@ -9,6 +9,7 @@ namespace GameShelf.API.Configurations
         public static void ConfigureRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IPrateleiraRepository, PrateleiraRepository>();
         }
 
     }

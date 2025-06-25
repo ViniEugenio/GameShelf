@@ -29,11 +29,13 @@ namespace GameShelf.Application.ApplicationServices.Services
 
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IAuthService _authService;
+        private readonly ISessao _sessao;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, IAuthService authService)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IAuthService authService, ISessao sessao)
         {
             _usuarioRepository = usuarioRepository;
             _authService = authService;
+            _sessao = sessao;
         }
 
         public async Task<ResponseDTO> CadastrarUsuario(CadastrarUsuarioCommand command)
@@ -70,7 +72,7 @@ namespace GameShelf.Application.ApplicationServices.Services
 
             }
 
-            await AplicarClaimsNovoUsuario(user);
+            await AplicarClaimsPrimeiroUsuario(user);
 
             return response;
 
@@ -213,34 +215,36 @@ namespace GameShelf.Application.ApplicationServices.Services
             }
 
             LoginProjection loginProjection = await _usuarioRepository.GetInformacoesLoginUsuario(command.Email);
+            UsuarioLoginDTO usuario = loginProjection.Usuario.Adapt<UsuarioLoginDTO>();
+
             LoginDTO loginDTO = new()
             {
                 JWT = _authService.GerarJWT(loginProjection.Claims),
-                Usuario = loginProjection.Usuario.Adapt<UsuarioLoginDTO>()
+                Usuario = usuario
             };
+
+            _sessao.SetUsuarioLogado(usuario);
 
             response.AddData(loginDTO);
 
             return response;
         }
 
-        private async Task AplicarClaimsNovoUsuario(User user)
+        private async Task AplicarClaimsPrimeiroUsuario(User user)
         {
 
             bool primeiroUsuario = (await _usuarioRepository
                 .Count(usuario => usuario.Ativo)) == 1;
 
-            Dictionary<string, EClaimPermissions> claims = [];
-            if (primeiroUsuario)
+            if (!primeiroUsuario)
             {
-
-                claims
-                    .Add(ClaimsManager.Admin, EClaimPermissions.Create | EClaimPermissions.Read | EClaimPermissions.Update | EClaimPermissions.Delete);
-
+                return;
             }
 
+            Dictionary<string, EClaimPermissions> claims = [];
+
             claims
-                .Add(ClaimsManager.User, EClaimPermissions.Create | EClaimPermissions.Read | EClaimPermissions.Update | EClaimPermissions.Delete);
+                .Add(ClaimsManager.Admin, EClaimPermissions.Create | EClaimPermissions.Read | EClaimPermissions.Update | EClaimPermissions.Delete);
 
             await _usuarioRepository.AdicionarClaims(user, claims);
 

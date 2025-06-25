@@ -5,7 +5,7 @@ using GameShelf.Domain.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace GameShelf.API.Filters
+namespace GameShelf.API.Filters.AuthorizationFilters
 {
 
     public class ClaimAuthorizeAttribute : TypeFilterAttribute
@@ -59,12 +59,12 @@ namespace GameShelf.API.Filters
 
                     claim.Type == ClaimsManager.Admin
 
-                    || (
+                    || 
 
                         claim.Type == _claim
                         && ((EClaimPermissions)Convert.ToInt32(claim.Value)).HasFlag(_permissao)
 
-                    )
+                    
 
                 );
 

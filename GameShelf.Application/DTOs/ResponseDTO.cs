@@ -13,7 +13,7 @@ namespace GameShelf.Application.DTOs
         public void AdicionarErros(params string[] erros)
         {
 
-            Response = "Não foi possível processar a sua requisição!";
+            Response = "Não foi possível processar a sua requisição, alguns erros foram identificados";
             Erros.AddRange(erros);
 
         }

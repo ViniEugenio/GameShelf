@@ -36,20 +36,21 @@ namespace GameShelf.API.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [UsuarioLogadoAuthorize]
         public async Task<IActionResult> AlterarUsuario([FromBody] AlterarUsuarioCommand command)
         {
             return await Respond(command);
         }
 
         [HttpGet]
-        [Authorize]
+        [UsuarioLogadoAuthorize]
         public async Task<IActionResult> GetUsuario([FromQuery] GetUsuarioQuery query)
         {
             return await Respond(query);
         }
 
         [HttpPatch("DesativarUsuario")]
+        [UsuarioLogadoAuthorize]
         [ClaimAuthorize(ClaimsManager.UserAdmin, EClaimPermissions.Delete)]
         public async Task<IActionResult> DesativarUsuario([FromBody] DesativarUsuarioCommand command)
         {
@@ -57,6 +58,7 @@ namespace GameShelf.API.Controllers
         }
 
         [HttpGet("GetListagemUsuarios")]
+        [UsuarioLogadoAuthorize]
         [ClaimAuthorize(ClaimsManager.UserAdmin, EClaimPermissions.Read)]
         public async Task<IActionResult> GetListagemUsuarios([FromQuery] GetListagemUsuariosQuery query)
         {
@@ -64,6 +66,7 @@ namespace GameShelf.API.Controllers
         }
 
         [HttpGet("GetListagemClaimsUsuarios")]
+        [UsuarioLogadoAuthorize]
         [ClaimAuthorize(ClaimsManager.UserAdmin, EClaimPermissions.Read)]
         public async Task<IActionResult> GetListagemClaimsUsuarios([FromQuery] GetListagemClaimsUsuariosQuery query)
         {

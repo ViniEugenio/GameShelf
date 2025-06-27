@@ -12,20 +12,20 @@ namespace GameShelf.API.Filters.AuthorizationFilters
     {
 
         public ClaimAuthorizeAttribute(string claim, EClaimPermissions permissao)
-            : base(typeof(ClaimVerifierFilter))
+            : base(typeof(ClaimAuthorizationFilter))
         {
             Arguments = [claim, permissao];
         }
 
     }
 
-    public class ClaimVerifierFilter : IAuthorizationFilter
+    public class ClaimAuthorizationFilter : IAuthorizationFilter
     {
 
         private readonly string _claim;
         private readonly EClaimPermissions _permissao;
 
-        public ClaimVerifierFilter(string claim, EClaimPermissions permissao)
+        public ClaimAuthorizationFilter(string claim, EClaimPermissions permissao)
         {
             _claim = claim;
             _permissao = permissao;
@@ -36,21 +36,6 @@ namespace GameShelf.API.Filters.AuthorizationFilters
 
             ResponseDTO response = new();
 
-            bool usuarioLogado = context.HttpContext.User.Identity != null
-                && context.HttpContext.User.Identity.IsAuthenticated;
-
-            if (!usuarioLogado)
-            {
-
-                response
-                    .AdicionarErros(UsuarioErros.UsuarioNaoLogado);
-
-                context.Result = new UnauthorizedObjectResult(response);
-
-                return;
-
-            }
-
             bool usuarioPossuiPermissaoAcesso = context
                 .HttpContext
                 .User
@@ -59,12 +44,12 @@ namespace GameShelf.API.Filters.AuthorizationFilters
 
                     claim.Type == ClaimsManager.Admin
 
-                    || 
+                    ||
 
                         claim.Type == _claim
                         && ((EClaimPermissions)Convert.ToInt32(claim.Value)).HasFlag(_permissao)
 
-                    
+
 
                 );
 

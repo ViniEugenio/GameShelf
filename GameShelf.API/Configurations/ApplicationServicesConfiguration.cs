@@ -8,10 +8,13 @@ namespace GameShelf.API.Configurations
 
         public static void ConfigureApplicationServices(this IServiceCollection services)
         {
+
+            services.AddSingleton<ISessao, Sessao>();
+
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IPrateleiraService, PrateleiraService>();
-            services.AddSingleton<ISessao, Sessao>();
+
         }
 
     }

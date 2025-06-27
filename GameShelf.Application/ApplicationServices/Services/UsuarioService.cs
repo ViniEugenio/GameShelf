@@ -54,13 +54,7 @@ namespace GameShelf.Application.ApplicationServices.Services
 
             }
 
-            User user = new()
-            {
-                Nome = command.Nome,
-                Sobrenome = command.Sobrenome,
-                UserName = command.Email,
-                Email = command.Email
-            };
+            User user = command.Adapt<User>();
 
             IdentityResult result = await _usuarioRepository.CadastrarUsuario(user, command.Senha);
 
@@ -73,6 +67,9 @@ namespace GameShelf.Application.ApplicationServices.Services
             }
 
             await AplicarClaimsPrimeiroUsuario(user);
+
+            response
+                .AddData(user.Adapt<NewRegisterDTO>());
 
             return response;
 

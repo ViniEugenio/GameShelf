@@ -15,6 +15,7 @@ namespace GameShelf.Domain.Entities
         public List<Comentario> ComentariosFeitos { get; set; } = [];
         public List<Prateleira> MinhasPrateleiras { get; set; } = [];
         public List<ParticipantePrateleira> PrateleirasParticipante { get; set; } = [];
+        public List<JogoPrateleira> JogosInseridosEmPrateleiras { get; set; } = [];
 
     }
 }

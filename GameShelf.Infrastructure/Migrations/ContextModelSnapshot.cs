@@ -43,7 +43,7 @@ namespace GameShelf.Infrastructure.Migrations
                     b.Property<DateTime?>("DataDesativacao")
                         .HasColumnType("smalldatetime");
 
-                    b.Property<Guid>("JogoId")
+                    b.Property<Guid>("JogoPrateleiraId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Texto")
@@ -55,7 +55,7 @@ namespace GameShelf.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("JogoId");
+                    b.HasIndex("JogoPrateleiraId");
 
                     b.HasIndex("UserId");
 
@@ -99,6 +99,33 @@ namespace GameShelf.Infrastructure.Migrations
                     b.ToTable("Comentario");
                 });
 
+            modelBuilder.Entity("GameShelf.Domain.Entities.Genero", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DataAlteracao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime>("DataAtivacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime?>("DataDesativacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genero");
+                });
+
             modelBuilder.Entity("GameShelf.Domain.Entities.Jogo", b =>
                 {
                     b.Property<Guid>("Id")
@@ -134,6 +161,110 @@ namespace GameShelf.Infrastructure.Migrations
                     b.ToTable("Jogo");
                 });
 
+            modelBuilder.Entity("GameShelf.Domain.Entities.JogoGenero", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DataAlteracao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime>("DataAtivacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime?>("DataDesativacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<Guid>("GeneroId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("JogoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneroId");
+
+                    b.HasIndex("JogoId");
+
+                    b.ToTable("JogoGenero");
+                });
+
+            modelBuilder.Entity("GameShelf.Domain.Entities.JogoPlataforma", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DataAlteracao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime>("DataAtivacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime?>("DataDesativacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<Guid>("JogoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PlataformaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JogoId");
+
+                    b.HasIndex("PlataformaId");
+
+                    b.ToTable("JogoPlataforma");
+                });
+
+            modelBuilder.Entity("GameShelf.Domain.Entities.JogoPrateleira", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DataAlteracao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime>("DataAtivacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime?>("DataDesativacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<Guid>("JogoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PrateleiraId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JogoId");
+
+                    b.HasIndex("PrateleiraId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("JogoPrateleira");
+                });
+
             modelBuilder.Entity("GameShelf.Domain.Entities.ParticipantePrateleira", b =>
                 {
                     b.Property<Guid>("Id")
@@ -165,6 +296,33 @@ namespace GameShelf.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ParticipantePrateleira");
+                });
+
+            modelBuilder.Entity("GameShelf.Domain.Entities.Plataforma", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DataAlteracao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime>("DataAtivacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime?>("DataDesativacao")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Plataforma");
                 });
 
             modelBuilder.Entity("GameShelf.Domain.Entities.Prateleira", b =>
@@ -418,10 +576,10 @@ namespace GameShelf.Infrastructure.Migrations
 
             modelBuilder.Entity("GameShelf.Domain.Entities.Analise", b =>
                 {
-                    b.HasOne("GameShelf.Domain.Entities.Jogo", "Jogo")
+                    b.HasOne("GameShelf.Domain.Entities.JogoPrateleira", "JogoPrateleira")
                         .WithMany("AnalisesRecebidas")
-                        .HasForeignKey("JogoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("JogoPrateleiraId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("GameShelf.Domain.Entities.User", "User")
@@ -430,7 +588,7 @@ namespace GameShelf.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Jogo");
+                    b.Navigation("JogoPrateleira");
 
                     b.Navigation("User");
                 });
@@ -450,6 +608,71 @@ namespace GameShelf.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Analise");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GameShelf.Domain.Entities.JogoGenero", b =>
+                {
+                    b.HasOne("GameShelf.Domain.Entities.Genero", "Genero")
+                        .WithMany("Jogos")
+                        .HasForeignKey("GeneroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GameShelf.Domain.Entities.Jogo", "Jogo")
+                        .WithMany("Generos")
+                        .HasForeignKey("JogoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Genero");
+
+                    b.Navigation("Jogo");
+                });
+
+            modelBuilder.Entity("GameShelf.Domain.Entities.JogoPlataforma", b =>
+                {
+                    b.HasOne("GameShelf.Domain.Entities.Jogo", "Jogo")
+                        .WithMany("Plataformas")
+                        .HasForeignKey("JogoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GameShelf.Domain.Entities.Plataforma", "Plataforma")
+                        .WithMany("Jogos")
+                        .HasForeignKey("PlataformaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Jogo");
+
+                    b.Navigation("Plataforma");
+                });
+
+            modelBuilder.Entity("GameShelf.Domain.Entities.JogoPrateleira", b =>
+                {
+                    b.HasOne("GameShelf.Domain.Entities.Jogo", "Jogo")
+                        .WithMany("Prateleiras")
+                        .HasForeignKey("JogoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GameShelf.Domain.Entities.Prateleira", "Prateleira")
+                        .WithMany("Jogos")
+                        .HasForeignKey("PrateleiraId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GameShelf.Domain.Entities.User", "User")
+                        .WithMany("JogosInseridosEmPrateleiras")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Jogo");
+
+                    b.Navigation("Prateleira");
 
                     b.Navigation("User");
                 });
@@ -540,13 +763,34 @@ namespace GameShelf.Infrastructure.Migrations
                     b.Navigation("ComentariosRecebidos");
                 });
 
+            modelBuilder.Entity("GameShelf.Domain.Entities.Genero", b =>
+                {
+                    b.Navigation("Jogos");
+                });
+
             modelBuilder.Entity("GameShelf.Domain.Entities.Jogo", b =>
+                {
+                    b.Navigation("Generos");
+
+                    b.Navigation("Plataformas");
+
+                    b.Navigation("Prateleiras");
+                });
+
+            modelBuilder.Entity("GameShelf.Domain.Entities.JogoPrateleira", b =>
                 {
                     b.Navigation("AnalisesRecebidas");
                 });
 
+            modelBuilder.Entity("GameShelf.Domain.Entities.Plataforma", b =>
+                {
+                    b.Navigation("Jogos");
+                });
+
             modelBuilder.Entity("GameShelf.Domain.Entities.Prateleira", b =>
                 {
+                    b.Navigation("Jogos");
+
                     b.Navigation("Participantes");
                 });
 
@@ -555,6 +799,8 @@ namespace GameShelf.Infrastructure.Migrations
                     b.Navigation("AnalisesFeitas");
 
                     b.Navigation("ComentariosFeitos");
+
+                    b.Navigation("JogosInseridosEmPrateleiras");
 
                     b.Navigation("MinhasPrateleiras");
 

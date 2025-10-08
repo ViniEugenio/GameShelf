@@ -8,6 +8,7 @@
         public string Nome { get; set; }
 
         public List<ParticipantePrateleira> Participantes { get; set; } = [];
+        public List<JogoPrateleira> Jogos { get; set; } = [];
 
     }
 }

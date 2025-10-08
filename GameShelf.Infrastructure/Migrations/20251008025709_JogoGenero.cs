@@ -6,18 +6,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GameShelf.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Prateleiras : Migration
+    public partial class JogoGenero : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Prateleira",
+                name: "Genero",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(500)", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(200)", nullable: false),
                     DataAtivacao = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     DataDesativacao = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     DataAlteracao = table.Column<DateTime>(type: "smalldatetime", nullable: true),
@@ -25,22 +24,16 @@ namespace GameShelf.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Prateleira", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Prateleira_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Genero", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ParticipantePrateleira",
+                name: "JogoGenero",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PrateleiraId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    JogoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GeneroId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DataAtivacao = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     DataDesativacao = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     DataAlteracao = table.Column<DateTime>(type: "smalldatetime", nullable: true),
@@ -48,45 +41,40 @@ namespace GameShelf.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ParticipantePrateleira", x => x.Id);
+                    table.PrimaryKey("PK_JogoGenero", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ParticipantePrateleira_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_JogoGenero_Genero_GeneroId",
+                        column: x => x.GeneroId,
+                        principalTable: "Genero",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ParticipantePrateleira_Prateleira_PrateleiraId",
-                        column: x => x.PrateleiraId,
-                        principalTable: "Prateleira",
+                        name: "FK_JogoGenero_Jogo_JogoId",
+                        column: x => x.JogoId,
+                        principalTable: "Jogo",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ParticipantePrateleira_PrateleiraId",
-                table: "ParticipantePrateleira",
-                column: "PrateleiraId");
+                name: "IX_JogoGenero_GeneroId",
+                table: "JogoGenero",
+                column: "GeneroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ParticipantePrateleira_UserId",
-                table: "ParticipantePrateleira",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Prateleira_UserId",
-                table: "Prateleira",
-                column: "UserId");
+                name: "IX_JogoGenero_JogoId",
+                table: "JogoGenero",
+                column: "JogoId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ParticipantePrateleira");
+                name: "JogoGenero");
 
             migrationBuilder.DropTable(
-                name: "Prateleira");
+                name: "Genero");
         }
     }
 }

@@ -17,9 +17,10 @@ namespace GameShelf.Infrastructure.Mappings
                 .HasForeignKey(analise => analise.UserId);
 
             builder
-                .HasOne(analise => analise.Jogo)
-                .WithMany(user => user.AnalisesRecebidas)
-                .HasForeignKey(analise => analise.JogoId);
+                .HasOne(analise => analise.JogoPrateleira)
+                .WithMany(jogoPrateleira => jogoPrateleira.AnalisesRecebidas)
+                .HasForeignKey(analise => analise.JogoPrateleiraId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .Property(analise => analise.Texto)

@@ -11,5 +11,6 @@ namespace GameShelf.Infrastructure.Persistence
         public DbSet<Comentario> Comentario { get; set; }
         public DbSet<Prateleira> Prateleira { get; set; }
         public DbSet<ParticipantePrateleira> ParticipantePrateleira { get; set; }
+        public DbSet<JogoPrateleira> JogoPrateleira { get; set; }
     }
 }

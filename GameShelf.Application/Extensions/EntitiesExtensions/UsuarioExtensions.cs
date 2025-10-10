@@ -1,4 +1,4 @@
-﻿using GameShelf.Application.Commands.AlterarUsuario;
+﻿using GameShelf.Application.CQRS.Commands.AlterarUsuario;
 using GameShelf.Domain.Entities;
 
 namespace GameShelf.Application.Extensions.EntitiesExtensions

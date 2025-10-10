@@ -1,6 +1,6 @@
 ﻿using GameShelf.Domain.Enums;
-using GameShelf.Domain.Projections.User;
-using GameShelf.Domain.Security;
+using GameShelf.Domain.Models.Projections.User;
+using GameShelf.Domain.Models.Security;
 
 namespace GameShelf.Application.DTOs.UsuarioDTO
 {

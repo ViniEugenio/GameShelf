@@ -1,17 +1,12 @@
 ﻿using GameShelf.Domain.Entities;
-using GameShelf.Domain.RepositoriesInterfaces;
+using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
 using GameShelf.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameShelf.Infrastructure.Repositories
 {
-    public class PrateleiraRepository : BaseRepository<Prateleira>, IPrateleiraRepository
+    public class PrateleiraRepository(Context context) : BaseRepository<Prateleira>(context), IPrateleiraRepository
     {
-
-        public PrateleiraRepository(Context context) : base(context)
-        {
-        }
-
         public async Task<bool> VerificarUsuarioEhParticipantePrateleira(Guid prateleiraId, Guid usuarioLogadoId)
         {
 

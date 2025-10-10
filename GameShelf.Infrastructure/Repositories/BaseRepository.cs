@@ -1,5 +1,5 @@
-﻿using GameShelf.Domain.Projections;
-using GameShelf.Domain.RepositoriesInterfaces;
+﻿using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
+using GameShelf.Domain.Models.Projections;
 using GameShelf.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;

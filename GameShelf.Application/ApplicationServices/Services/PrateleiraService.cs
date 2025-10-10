@@ -1,10 +1,10 @@
 ﻿using FluentValidation.Results;
 using GameShelf.Application.ApplicationServices.Interfaces;
-using GameShelf.Application.Commands.CriarPrateleira;
+using GameShelf.Application.CQRS.Commands.CriarPrateleira;
+using GameShelf.Application.CQRS.Validators;
 using GameShelf.Application.DTOs;
-using GameShelf.Application.Validators;
 using GameShelf.Domain.Entities;
-using GameShelf.Domain.RepositoriesInterfaces;
+using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
 using Mapster;
 
 namespace GameShelf.Application.ApplicationServices.Services

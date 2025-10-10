@@ -14,6 +14,9 @@ namespace GameShelf.API.Configurations
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IPrateleiraService, PrateleiraService>();
+            services.AddScoped<IGeneroService, GeneroService>();
+            services.AddScoped<IPlataformaService, PlataformaService>();
+            services.AddScoped<IJogoService, JogoService>();
 
         }
 

@@ -1,4 +1,5 @@
-﻿using GameShelf.Application.DTOs.UsuarioDTO;
+﻿using GameShelf.Application.DTOs.RawGDTO;
+using GameShelf.Application.DTOs.UsuarioDTO;
 
 namespace GameShelf.API.Configurations
 {
@@ -10,6 +11,9 @@ namespace GameShelf.API.Configurations
 
             services
                 .Configure<JwtDTO>(configuration.GetSection("JWTConfiguration"));
+
+            services
+                .Configure<RawGConfigurationDTO>(configuration.GetSection("RawGConfiguration"));
 
         }
 

@@ -1,5 +1,5 @@
 ﻿using GameShelf.API.Filters.AuthorizationFilters;
-using GameShelf.Application.Commands.CriarPrateleira;
+using GameShelf.Application.CQRS.Commands.CriarPrateleira;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,4 @@
-﻿using GameShelf.Domain.RepositoriesInterfaces;
+﻿using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
 using GameShelf.Infrastructure.Repositories;
 
 namespace GameShelf.API.Configurations
@@ -10,6 +10,9 @@ namespace GameShelf.API.Configurations
         {
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IPrateleiraRepository, PrateleiraRepository>();
+            services.AddScoped<IGeneroRepository, GeneroRepository>();
+            services.AddScoped<IPlataformaRepository, PlataformaRepository>();
+            services.AddScoped<IJogoRepository, JogoRepository>();
         }
 
     }

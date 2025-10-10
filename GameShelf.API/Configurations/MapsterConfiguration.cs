@@ -1,12 +1,12 @@
-﻿using GameShelf.Application.Commands.CadastrarUsuario;
-using GameShelf.Application.Commands.CriarPrateleira;
+﻿using GameShelf.Application.CQRS.Commands.CadastrarUsuario;
+using GameShelf.Application.CQRS.Commands.CriarPrateleira;
+using GameShelf.Application.CQRS.Queries.GetListagemClaimsUsuarios;
+using GameShelf.Application.CQRS.Queries.GetListagemUsuarios;
 using GameShelf.Application.DTOs;
 using GameShelf.Application.DTOs.UsuarioDTO;
-using GameShelf.Application.Queries.GetListagemClaimsUsuarios;
-using GameShelf.Application.Queries.GetListagemUsuarios;
 using GameShelf.Domain.Entities;
-using GameShelf.Domain.Filters.User;
-using GameShelf.Domain.Projections.User;
+using GameShelf.Domain.Models.Filters.User;
+using GameShelf.Domain.Models.Projections.User;
 using Mapster;
 using System.Reflection;
 

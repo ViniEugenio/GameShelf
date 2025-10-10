@@ -1,4 +1,4 @@
-﻿using GameShelf.Application.Commands.CadastrarUsuario;
+﻿using GameShelf.Application.CQRS.Commands.CadastrarUsuario;
 
 namespace GameShelf.API.Configurations
 {

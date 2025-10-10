@@ -1,11 +1,11 @@
-﻿using GameShelf.Application.Commands.AlterarUsuario;
-using GameShelf.Application.Commands.CadastrarUsuario;
-using GameShelf.Application.Commands.DesativarUsuario;
-using GameShelf.Application.Commands.Login;
+﻿using GameShelf.Application.CQRS.Commands.AlterarUsuario;
+using GameShelf.Application.CQRS.Commands.CadastrarUsuario;
+using GameShelf.Application.CQRS.Commands.DesativarUsuario;
+using GameShelf.Application.CQRS.Commands.Login;
+using GameShelf.Application.CQRS.Queries.GetListagemClaimsUsuarios;
+using GameShelf.Application.CQRS.Queries.GetListagemUsuarios;
+using GameShelf.Application.CQRS.Queries.GetUsuario;
 using GameShelf.Application.DTOs;
-using GameShelf.Application.Queries.GetListagemClaimsUsuarios;
-using GameShelf.Application.Queries.GetListagemUsuarios;
-using GameShelf.Application.Queries.GetUsuario;
 
 namespace GameShelf.Application.ApplicationServices.Interfaces
 {

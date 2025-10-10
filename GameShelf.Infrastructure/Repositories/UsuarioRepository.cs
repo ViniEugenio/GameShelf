@@ -1,10 +1,9 @@
 ﻿using GameShelf.Domain.Entities;
 using GameShelf.Domain.Enums;
-using GameShelf.Domain.Filters.User;
-using GameShelf.Domain.Projections;
-using GameShelf.Domain.Projections.User;
-using GameShelf.Domain.RepositoriesInterfaces;
-using GameShelf.Domain.Security;
+using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
+using GameShelf.Domain.Models.Filters.User;
+using GameShelf.Domain.Models.Projections;
+using GameShelf.Domain.Models.Projections.User;
 using GameShelf.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

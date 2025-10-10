@@ -14,6 +14,7 @@ services.ConfigureIdentity();
 services.ConfigureMapster();
 services.ConfigureIOptionsConfigurations(builder.Configuration);
 services.ConfigureJWTAuthentication(builder.Configuration);
+services.ConfigureExternalServices();
 
 var app = builder.Build();
 

@@ -1,4 +1,4 @@
-﻿using GameShelf.Application.Commands.CriarPrateleira;
+﻿using GameShelf.Application.CQRS.Commands.CriarPrateleira;
 using GameShelf.Application.DTOs;
 
 namespace GameShelf.Application.ApplicationServices.Interfaces

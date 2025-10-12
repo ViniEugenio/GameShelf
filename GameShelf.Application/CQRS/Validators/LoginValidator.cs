@@ -1,37 +1,13 @@
 ﻿using FluentValidation;
-using FluentValidation.Results;
 using GameShelf.Application.CQRS.Commands.Login;
 using GameShelf.Application.CQRS.Validators.ErrorMessages;
-using GameShelf.Application.DTOs;
 
 namespace GameShelf.Application.CQRS.Validators
 {
-    public class LoginValidator
+    public class LoginValidator : AbstractValidator<LoginCommand>
     {
 
-        public static async Task<ResponseDTO> Validar(LoginCommand command)
-        {
-
-            ResponseDTO response = new();
-            LoginInputValidator validator = new();
-
-            ValidationResult validation = await validator.ValidateAsync(command);
-
-            if (!validation.IsValid)
-            {
-                response.AdicionarErros(validation);
-            }
-
-            return response;
-
-        }
-
-    }
-
-    public class LoginInputValidator : AbstractValidator<LoginCommand>
-    {
-
-        public LoginInputValidator()
+        public LoginValidator()
         {
 
             RuleFor(login => login.Email)
@@ -45,5 +21,4 @@ namespace GameShelf.Application.CQRS.Validators
         }
 
     }
-
 }

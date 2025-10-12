@@ -1,49 +1,35 @@
 ﻿using FluentValidation;
-using FluentValidation.Results;
 using GameShelf.Application.ApplicationServices.Interfaces;
 using GameShelf.Application.CQRS.Commands.CriarPrateleira;
 using GameShelf.Application.CQRS.Validators.ErrorMessages;
-using GameShelf.Application.DTOs;
 using GameShelf.Application.DTOs.UsuarioDTO;
 using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
 
 namespace GameShelf.Application.CQRS.Validators
 {
-    public class CriarPrateleiraValidator(IPrateleiraRepository prateleiraRepository, IUsuarioRepository usuarioRepository, ISessao sessao)
+    public class CriarPrateleiraValidator : AbstractValidator<CriarPrateleiraCommand>
     {
 
-        private readonly IPrateleiraRepository _prateleiraRepository = prateleiraRepository;
-        private readonly IUsuarioRepository _usuarioRepository = usuarioRepository;
-        private readonly ISessao _sessao = sessao;
+        private readonly IPrateleiraRepository _prateleiraRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly ISessao _sessao;
 
-        public async Task<ResponseDTO> Validar(CriarPrateleiraCommand command)
+        public CriarPrateleiraValidator(IPrateleiraRepository prateleiraRepository, IUsuarioRepository usuarioRepository, ISessao sessao)
         {
 
-            ResponseDTO response = new();
+            _prateleiraRepository = prateleiraRepository;
+            _usuarioRepository = usuarioRepository;
+            _sessao = sessao;
 
-            CriarPrateleiraInputValidator validator = new();
-            ValidationResult validation = await validator.ValidateAsync(command);
+            RuleFor(prateleira => prateleira.Nome)
+                .NotEmpty()
+                .WithMessage(PrateleiraErros.NomeVazio)
+                .MustAsync(async (nome, cancellationToken) => await VerificarPrateleiraDuplicada(nome))
+                .WithMessage(PrateleiraErros.NomeDuplicado);
 
-            if (!validation.IsValid)
-            {
-                response.AdicionarErros(validation);
-                return response;
-            }
-
-            if (!await VerificarPrateleiraDuplicada(command.Nome))
-            {
-
-                response.AdicionarErros(PrateleiraErros.NomeDuplicado);
-                return response;
-
-            }
-
-            if (!await VerificarParticipantesPrateleira(command.Participantes))
-            {
-                response.AdicionarErros(PrateleiraErros.ParticipantesNaoEncontrados);
-            }
-
-            return response;
+            RuleFor(prateleira => prateleira.Participantes)
+                .MustAsync(async (participantes, cancellationToken) => await VerificarParticipantesPrateleira(participantes))
+                .WithMessage(PrateleiraErros.ParticipantesNaoEncontrados);
 
         }
 
@@ -80,20 +66,4 @@ namespace GameShelf.Application.CQRS.Validators
         }
 
     }
-
-    public class CriarPrateleiraInputValidator : AbstractValidator<CriarPrateleiraCommand>
-    {
-
-        public CriarPrateleiraInputValidator()
-        {
-
-            RuleFor(prateleira => prateleira.Nome)
-                 .NotEmpty()
-                 .WithMessage(PrateleiraErros.NomeVazio)
-                 .WithMessage(PrateleiraErros.NomeDuplicado);
-
-        }
-
-    }
-
 }

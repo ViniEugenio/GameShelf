@@ -1,42 +1,25 @@
 ﻿using FluentValidation;
-using FluentValidation.Results;
 using GameShelf.Application.CQRS.Queries.GetUsuario;
 using GameShelf.Application.CQRS.Validators.ErrorMessages;
-using GameShelf.Application.DTOs;
 using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
 
 namespace GameShelf.Application.CQRS.Validators
 {
-    public class GetUsuarioSimplificadoValidator(IUsuarioRepository usuarioRepository)
+    public class GetUsuarioSimplificadoValidator : AbstractValidator<GetUsuarioQuery>
     {
 
-        private readonly IUsuarioRepository _usuarioRepository = usuarioRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public async Task<ResponseDTO> Validar(GetUsuarioQuery query)
+        public GetUsuarioSimplificadoValidator(IUsuarioRepository usuarioRepository)
         {
 
-            ResponseDTO response = new();
+            _usuarioRepository = usuarioRepository;
 
-            GetUsuarioSimplificadoInputValidator validator = new();
-            ValidationResult validation = await validator.ValidateAsync(query);
-
-            if (!validation.IsValid)
-            {
-
-                response.AdicionarErros(validation);
-                return response;
-
-            }
-
-            if (!await UsuarioEncontrado(query.Id))
-            {
-
-                response.AdicionarErros(UsuarioErros.UsuarioNaoEncontrado);
-                return response;
-
-            }
-
-            return response;
+            RuleFor(usuario => usuario.Id)
+                .NotEmpty()
+                .WithMessage(UsuarioErros.IdVazio)
+                .MustAsync(async (id, cancellationToken) => await UsuarioEncontrado(id))
+                .WithMessage(UsuarioErros.UsuarioNaoEncontrado);
 
         }
 
@@ -46,19 +29,4 @@ namespace GameShelf.Application.CQRS.Validators
         }
 
     }
-
-    public class GetUsuarioSimplificadoInputValidator : AbstractValidator<GetUsuarioQuery>
-    {
-
-        public GetUsuarioSimplificadoInputValidator()
-        {
-
-            RuleFor(usuario => usuario.Id)
-                .NotEmpty()
-                .WithMessage(UsuarioErros.IdVazio);
-
-        }
-
-    }
-
 }

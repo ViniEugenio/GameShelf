@@ -19,39 +19,29 @@ using GameShelf.Domain.Models.Filters.User;
 using GameShelf.Domain.Models.Projections;
 using GameShelf.Domain.Models.Projections.User;
 using GameShelf.Domain.Models.Security;
-using Mapster;
 using Microsoft.AspNetCore.Identity;
 
 namespace GameShelf.Application.ApplicationServices.Services
 {
-    public class UsuarioService : IUsuarioService
+    public class UsuarioService(
+        IUsuarioRepository usuarioRepository,
+        IAuthService authService,
+        ISessao sessao) : IUsuarioService
     {
 
-        private readonly IUsuarioRepository _usuarioRepository;
-        private readonly IAuthService _authService;
-        private readonly ISessao _sessao;
-
-        public UsuarioService(IUsuarioRepository usuarioRepository, IAuthService authService, ISessao sessao)
-        {
-            _usuarioRepository = usuarioRepository;
-            _authService = authService;
-            _sessao = sessao;
-        }
+        private readonly IUsuarioRepository _usuarioRepository = usuarioRepository;
+        private readonly IAuthService _authService = authService;
+        private readonly ISessao _sessao = sessao;
 
         public async Task<ResponseDTO> CadastrarUsuario(CadastrarUsuarioCommand command)
         {
 
-            ResponseDTO response = new();
-
             CadastrarUsuarioValidator validator = new(_usuarioRepository);
-            ValidationResult validationResult = await validator.ValidateAsync(command);
+            ResponseDTO response = await validator.Validar(command);
 
-            if (!validationResult.IsValid)
+            if (!response.IsValid())
             {
-
-                response.AdicionarErros(validationResult);
                 return response;
-
             }
 
             User user = command.Adapt<User>();
@@ -78,17 +68,12 @@ namespace GameShelf.Application.ApplicationServices.Services
         public async Task<ResponseDTO> AlterarUsuario(AlterarUsuarioCommand command)
         {
 
-            ResponseDTO response = new();
-
             AlterarUsuarioValidator validator = new(_usuarioRepository);
-            ValidationResult validationResult = await validator.ValidateAsync(command);
+            ResponseDTO response = await validator.Validar(command);
 
-            if (!validationResult.IsValid)
+            if (!response.IsValid())
             {
-
-                response.AdicionarErros(validationResult);
                 return response;
-
             }
 
             User usuarioParaAlteracao = await _usuarioRepository.GetById(command.Id);
@@ -128,17 +113,12 @@ namespace GameShelf.Application.ApplicationServices.Services
         public async Task<ResponseDTO> DesativarUsuario(DesativarUsuarioCommand command)
         {
 
-            ResponseDTO response = new();
-
             DesativarUsuarioValidator validator = new(_usuarioRepository);
-            ValidationResult validationResult = await validator.ValidateAsync(command);
+            ResponseDTO response = await validator.Validar(command);
 
-            if (!validationResult.IsValid)
+            if (!response.IsValid())
             {
-
-                response.AdicionarErros(validationResult);
                 return response;
-
             }
 
             User usuarioParaDesativacao = await _usuarioRepository.GetById(command.Id);
@@ -153,17 +133,12 @@ namespace GameShelf.Application.ApplicationServices.Services
         public async Task<ResponseDTO> GetUsuariosPaginados(GetListagemUsuariosQuery query)
         {
 
-            ResponseDTO response = new();
-
             PaginacaoValidator validator = new();
-            ValidationResult validationResult = validator.Validate(query);
+            ResponseDTO response = await validator.Validar(query);
 
-            if (!validationResult.IsValid)
+            if (!response.IsValid())
             {
-
-                response.AdicionarErros(validationResult);
                 return response;
-
             }
 
             GetListagemUsuariosFilter filtro = query.Adapt<GetListagemUsuariosFilter>();

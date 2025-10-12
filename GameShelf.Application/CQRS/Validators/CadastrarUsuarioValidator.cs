@@ -1,44 +1,40 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using GameShelf.Application.CQRS.Commands.CadastrarUsuario;
 using GameShelf.Application.CQRS.Validators.ErrorMessages;
+using GameShelf.Application.DTOs;
 using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
 using System.Text.RegularExpressions;
 
 namespace GameShelf.Application.CQRS.Validators
 {
-    public class CadastrarUsuarioValidator : AbstractValidator<CadastrarUsuarioCommand>
+    public class CadastrarUsuarioValidator(IUsuarioRepository usuarioRepository)
     {
 
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioRepository _usuarioRepository = usuarioRepository;
 
-        public CadastrarUsuarioValidator(IUsuarioRepository usuarioRepository)
+        public async Task<ResponseDTO> Validar(CadastrarUsuarioCommand command)
         {
 
-            _usuarioRepository = usuarioRepository;
+            ResponseDTO response = new();
 
-            RuleFor(usuario => usuario.Nome)
-                .NotEmpty()
-                .WithMessage(UsuarioErros.NomeVazio);
+            CadastrarUsuarioInputValidator validator = new();
+            ValidationResult validation = await validator.ValidateAsync(command);
 
-            RuleFor(usuario => usuario.Sobrenome)
-                .NotEmpty()
-                .WithMessage(UsuarioErros.SobrenomeVazio);
+            if (!validation.IsValid)
+            {
 
-            RuleFor(usuario => usuario.Email)
-                .NotEmpty()
-                .WithMessage(UsuarioErros.EmailVazio)
-                .MustAsync(async (email, cancellation) => await EmailValido(email))
-                .WithMessage(UsuarioErros.EmailEmUso)
-                .EmailAddress()
-                .WithMessage(UsuarioErros.EmailEmFormatoInvalido);
+                response.AdicionarErros(validation);
+                return response;
 
-            RuleFor(usuario => usuario.Senha)
-                .NotEmpty()
-                .WithMessage(UsuarioErros.SenhaVazia)
-                .Equal(usuario => usuario.ConfirmacaoSenha)
-                .WithMessage(UsuarioErros.SenhasDiferentes)
-                .Must(SenhaFormatoValido)
-                .WithMessage(UsuarioErros.SenhaEmFormatoInvalido);
+            }
+
+            if(!await EmailValido(command.Email))
+            {
+                response.AdicionarErros(UsuarioErros.EmailEmUso);
+            }
+
+            return response;
 
         }
 
@@ -52,6 +48,39 @@ namespace GameShelf.Application.CQRS.Validators
 
             return !await _usuarioRepository
                 .Exists(usuario => usuario.Email == email);
+
+        }
+
+    }
+
+    public class CadastrarUsuarioInputValidator : AbstractValidator<CadastrarUsuarioCommand>
+    {
+
+        public CadastrarUsuarioInputValidator()
+        {
+
+            RuleFor(usuario => usuario.Nome)
+                .NotEmpty()
+                .WithMessage(UsuarioErros.NomeVazio);
+
+            RuleFor(usuario => usuario.Sobrenome)
+                .NotEmpty()
+                .WithMessage(UsuarioErros.SobrenomeVazio);
+
+            RuleFor(usuario => usuario.Email)
+                .NotEmpty()
+                .WithMessage(UsuarioErros.EmailVazio)
+                .WithMessage(UsuarioErros.EmailEmUso)
+                .EmailAddress()
+                .WithMessage(UsuarioErros.EmailEmFormatoInvalido);
+
+            RuleFor(usuario => usuario.Senha)
+                .NotEmpty()
+                .WithMessage(UsuarioErros.SenhaVazia)
+                .Equal(usuario => usuario.ConfirmacaoSenha)
+                .WithMessage(UsuarioErros.SenhasDiferentes)
+                .Must(SenhaFormatoValido)
+                .WithMessage(UsuarioErros.SenhaEmFormatoInvalido);
 
         }
 
@@ -69,4 +98,5 @@ namespace GameShelf.Application.CQRS.Validators
         }
 
     }
+
 }

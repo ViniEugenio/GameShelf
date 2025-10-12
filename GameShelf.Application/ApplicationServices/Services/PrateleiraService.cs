@@ -1,11 +1,9 @@
-﻿using FluentValidation.Results;
-using GameShelf.Application.ApplicationServices.Interfaces;
+﻿using GameShelf.Application.ApplicationServices.Interfaces;
 using GameShelf.Application.CQRS.Commands.CriarPrateleira;
 using GameShelf.Application.CQRS.Validators;
 using GameShelf.Application.DTOs;
 using GameShelf.Domain.Entities;
 using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
-using Mapster;
 
 namespace GameShelf.Application.ApplicationServices.Services
 {
@@ -34,21 +32,12 @@ namespace GameShelf.Application.ApplicationServices.Services
                 .Participantes
                 .Remove(idUsuarioLogado);
 
-            ResponseDTO response = new();
-
             CriarPrateleiraValidator validator = new(_prateleiraRepository, _usuarioRepository, _sessao);
+            ResponseDTO response = await validator.Validar(command);
 
-            ValidationResult validacao = await validator
-                .ValidateAsync(command);
-
-            if (!validacao.IsValid)
+            if (!response.IsValid())
             {
-
-                response
-                    .AdicionarErros(validacao);
-
                 return response;
-
             }
 
             Prateleira novaPrateleira = command

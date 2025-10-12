@@ -1,27 +1,39 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using GameShelf.Application.CQRS.Commands.DesativarUsuario;
 using GameShelf.Application.CQRS.Validators.ErrorMessages;
+using GameShelf.Application.DTOs;
 using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
 
 namespace GameShelf.Application.CQRS.Validators
 {
-    public class DesativarUsuarioValidator : AbstractValidator<DesativarUsuarioCommand>
+    public class DesativarUsuarioValidator(IUsuarioRepository usuarioRepository)
     {
 
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioRepository _usuarioRepository = usuarioRepository;
 
-        public DesativarUsuarioValidator(IUsuarioRepository usuarioRepository)
+        public async Task<ResponseDTO> Validar(DesativarUsuarioCommand command)
         {
 
-            _usuarioRepository = usuarioRepository;
+            ResponseDTO response = new();
 
-            _usuarioRepository = usuarioRepository;
+            DesativarUsuarioInputValidator inputValidator = new();
+            ValidationResult validation = await inputValidator.ValidateAsync(command);
 
-            RuleFor(usuario => usuario.Id)
-                .NotEmpty()
-                .WithMessage(UsuarioErros.IdVazio)
-                .MustAsync(async (id, cancellationToken) => await UsuarioValidoParaInativacao(id))
-                .WithMessage(UsuarioErros.ErroInativacao);
+            if (!validation.IsValid)
+            {
+
+                response.AdicionarErros(validation);
+                return response;
+
+            }
+
+            if (!await UsuarioValidoParaInativacao(command.Id))
+            {
+                response.AdicionarErros(UsuarioErros.ErroInativacao);
+            }
+
+            return response;
 
         }
 
@@ -39,4 +51,19 @@ namespace GameShelf.Application.CQRS.Validators
         }
 
     }
+
+    public class DesativarUsuarioInputValidator : AbstractValidator<DesativarUsuarioCommand>
+    {
+
+        public DesativarUsuarioInputValidator()
+        {
+
+            RuleFor(usuario => usuario.Id)
+                .NotEmpty()
+                .WithMessage(UsuarioErros.IdVazio);
+
+        }
+
+    }
+
 }

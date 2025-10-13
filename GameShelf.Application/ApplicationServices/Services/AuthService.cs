@@ -8,15 +8,10 @@ using System.Text;
 
 namespace GameShelf.Application.ApplicationServices.Services
 {
-    public class AuthService : IAuthService
+    public class AuthService(IOptions<JwtDTO> jwtConfiguration) : IAuthService
     {
 
-        private readonly JwtDTO _jwtConfiguration;
-
-        public AuthService(IOptions<JwtDTO> jwtConfiguration)
-        {
-            _jwtConfiguration = jwtConfiguration.Value;
-        }
+        private readonly JwtDTO _jwtConfiguration = jwtConfiguration.Value;
 
         public string GerarJWT(ClaimsIdentity claimsIdentity)
         {

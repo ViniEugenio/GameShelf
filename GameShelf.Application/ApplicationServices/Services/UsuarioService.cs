@@ -12,6 +12,7 @@ using GameShelf.Application.CQRS.Validators.ErrorMessages;
 using GameShelf.Application.DTOs;
 using GameShelf.Application.DTOs.UsuarioDTO;
 using GameShelf.Application.Extensions.EntitiesExtensions;
+using GameShelf.Application.Mappings;
 using GameShelf.Domain.Entities;
 using GameShelf.Domain.Enums;
 using GameShelf.Domain.Interfaces.RepositoriesInterfaces;
@@ -19,24 +20,16 @@ using GameShelf.Domain.Models.Filters.User;
 using GameShelf.Domain.Models.Projections;
 using GameShelf.Domain.Models.Projections.User;
 using GameShelf.Domain.Models.Security;
-using Mapster;
 using Microsoft.AspNetCore.Identity;
 
 namespace GameShelf.Application.ApplicationServices.Services
 {
-    public class UsuarioService : IUsuarioService
+    public class UsuarioService(IUsuarioRepository usuarioRepository, IAuthService authService, ISessao sessao) : IUsuarioService
     {
 
-        private readonly IUsuarioRepository _usuarioRepository;
-        private readonly IAuthService _authService;
-        private readonly ISessao _sessao;
-
-        public UsuarioService(IUsuarioRepository usuarioRepository, IAuthService authService, ISessao sessao)
-        {
-            _usuarioRepository = usuarioRepository;
-            _authService = authService;
-            _sessao = sessao;
-        }
+        private readonly IUsuarioRepository _usuarioRepository = usuarioRepository;
+        private readonly IAuthService _authService = authService;
+        private readonly ISessao _sessao = sessao;
 
         public async Task<ResponseDTO> CadastrarUsuario(CadastrarUsuarioCommand command)
         {
@@ -44,7 +37,9 @@ namespace GameShelf.Application.ApplicationServices.Services
             ResponseDTO response = new();
 
             CadastrarUsuarioValidator validator = new(_usuarioRepository);
-            ValidationResult validationResult = await validator.ValidateAsync(command);
+
+            ValidationResult validationResult = await validator
+                .ValidateAsync(command);
 
             if (!validationResult.IsValid)
             {
@@ -54,14 +49,18 @@ namespace GameShelf.Application.ApplicationServices.Services
 
             }
 
-            User user = command.Adapt<User>();
+            User user = UsuarioMappings
+                .MapNovoUsuario(command);
 
-            IdentityResult result = await _usuarioRepository.CadastrarUsuario(user, command.Senha);
+            IdentityResult result = await _usuarioRepository
+                .CadastrarUsuario(user, command.Senha);
 
             if (!result.Succeeded)
             {
 
-                response.AdicionarErros(result);
+                response
+                    .AdicionarErros(result);
+
                 return response;
 
             }
@@ -69,7 +68,7 @@ namespace GameShelf.Application.ApplicationServices.Services
             await AplicarClaimsPrimeiroUsuario(user);
 
             response
-                .AddData(user.Adapt<NewRegisterDTO>());
+                .AddData(CommonMappings.MapNewRegister(user));
 
             return response;
 
@@ -81,20 +80,28 @@ namespace GameShelf.Application.ApplicationServices.Services
             ResponseDTO response = new();
 
             AlterarUsuarioValidator validator = new(_usuarioRepository);
-            ValidationResult validationResult = await validator.ValidateAsync(command);
+
+            ValidationResult validationResult = await validator
+                .ValidateAsync(command);
 
             if (!validationResult.IsValid)
             {
 
-                response.AdicionarErros(validationResult);
+                response
+                    .AdicionarErros(validationResult);
+
                 return response;
 
             }
 
-            User usuarioParaAlteracao = await _usuarioRepository.GetById(command.Id);
-            usuarioParaAlteracao.AtualizarUsuario(command);
+            User usuarioParaAlteracao = await _usuarioRepository
+                .GetById(command.Id);
 
-            await _usuarioRepository.Update(usuarioParaAlteracao);
+            usuarioParaAlteracao
+                .AtualizarUsuario(command);
+
+            await _usuarioRepository
+                .Update(usuarioParaAlteracao);
 
             return response;
 
@@ -106,7 +113,9 @@ namespace GameShelf.Application.ApplicationServices.Services
             ResponseDTO response = new();
 
             GetUsuarioSimplificadoValidator validator = new(_usuarioRepository);
-            ValidationResult validationResult = await validator.ValidateAsync(query);
+
+            ValidationResult validationResult = await validator
+                .ValidateAsync(query);
 
             if (!validationResult.IsValid)
             {
@@ -116,10 +125,14 @@ namespace GameShelf.Application.ApplicationServices.Services
 
             }
 
-            UsuarioSimplificadoProjection projection = await _usuarioRepository.GetUsuarioSimplificado(query.Id);
-            UsuarioSimplificadoDTO usuario = projection.Adapt<UsuarioSimplificadoDTO>();
+            UsuarioSimplificadoProjection projection = await _usuarioRepository
+                .GetUsuarioSimplificado(query.Id);
 
-            response.AddData(usuario);
+            UsuarioSimplificadoDTO usuario = UsuarioMappings
+                .MapUsuarioSimplificado(projection);
+
+            response
+                .AddData(usuario);
 
             return response;
 
@@ -131,20 +144,28 @@ namespace GameShelf.Application.ApplicationServices.Services
             ResponseDTO response = new();
 
             DesativarUsuarioValidator validator = new(_usuarioRepository);
-            ValidationResult validationResult = await validator.ValidateAsync(command);
+
+            ValidationResult validationResult = await validator
+                .ValidateAsync(command);
 
             if (!validationResult.IsValid)
             {
 
-                response.AdicionarErros(validationResult);
+                response
+                    .AdicionarErros(validationResult);
+
                 return response;
 
             }
 
-            User usuarioParaDesativacao = await _usuarioRepository.GetById(command.Id);
-            usuarioParaDesativacao.DesativarUsuario();
+            User usuarioParaDesativacao = await _usuarioRepository
+                .GetById(command.Id);
 
-            await _usuarioRepository.Update(usuarioParaDesativacao);
+            usuarioParaDesativacao
+                .DesativarUsuario();
+
+            await _usuarioRepository
+                .Update(usuarioParaDesativacao);
 
             return response;
 
@@ -156,7 +177,9 @@ namespace GameShelf.Application.ApplicationServices.Services
             ResponseDTO response = new();
 
             PaginacaoValidator validator = new();
-            ValidationResult validationResult = validator.Validate(query);
+
+            ValidationResult validationResult = validator
+                .Validate(query);
 
             if (!validationResult.IsValid)
             {
@@ -166,20 +189,17 @@ namespace GameShelf.Application.ApplicationServices.Services
 
             }
 
-            GetListagemUsuariosFilter filtro = query.Adapt<GetListagemUsuariosFilter>();
+            GetListagemUsuariosFilter filtro = UsuarioMappings
+                .MapFiltroListagemUsuarios(query);
 
             PaginatedProjection<UsuarioPaginacaoProjection> projection = await _usuarioRepository
                 .GetUsuarioPaginados(filtro);
 
-            PaginatedResultDTO<UsuarioListagemDTO> paginacao = new()
-            {
-                PaginaAtual = query.PaginaAtual,
-                QuantidadePorPagina = query.Quantidade,
-                QuantidadeTotal = projection.QuantidadeTotal,
-                Listagem = projection.Listagem.Adapt<List<UsuarioListagemDTO>>()
-            };
+            PaginatedResultDTO<UsuarioListagemDTO> paginacao = UsuarioMappings
+                .MapListagemsUsuarios(projection, query);
 
-            response.AddData(paginacao);
+            response
+                .AddData(paginacao);
 
             return response;
 
@@ -191,40 +211,49 @@ namespace GameShelf.Application.ApplicationServices.Services
             ResponseDTO response = new();
 
             LoginValidator validator = new();
-            ValidationResult validationResult = validator.Validate(command);
+
+            ValidationResult validationResult = validator
+                .Validate(command);
 
             if (!validationResult.IsValid)
             {
 
-                response.AdicionarErros(validationResult);
+                response
+                    .AdicionarErros(validationResult);
+
                 return response;
 
             }
 
-            SignInResult signInResult = await _usuarioRepository.Login(command.Email, command.Password);
+            SignInResult signInResult = await _usuarioRepository
+                .Login(command.Email, command.Password);
 
             if (!signInResult.Succeeded)
             {
 
-                response.AdicionarErros(UsuarioErros.LoginInvalido);
+                response
+                    .AdicionarErros(UsuarioErros.LoginInvalido);
+
                 return response;
 
             }
 
-            LoginProjection loginProjection = await _usuarioRepository.GetInformacoesLoginUsuario(command.Email);
-            UsuarioLoginDTO usuario = loginProjection.Usuario.Adapt<UsuarioLoginDTO>();
+            LoginProjection loginProjection = await _usuarioRepository
+                .GetInformacoesLoginUsuario(command.Email);
 
-            LoginDTO loginDTO = new()
-            {
-                JWT = _authService.GerarJWT(loginProjection.Claims),
-                Usuario = usuario
-            };
+            string jwt = _authService.GerarJWT(loginProjection.Claims);
 
-            _sessao.SetUsuarioLogado(usuario);
+            LoginDTO loginDTO = UsuarioMappings
+                .MapLoginUsuario(loginProjection, jwt);
 
-            response.AddData(loginDTO);
+            _sessao
+                .SetUsuarioLogado(loginDTO.Usuario);
+
+            response
+                .AddData(loginDTO);
 
             return response;
+
         }
 
         private async Task AplicarClaimsPrimeiroUsuario(User user)
@@ -241,7 +270,14 @@ namespace GameShelf.Application.ApplicationServices.Services
             Dictionary<string, EClaimPermissions> claims = [];
 
             claims
-                .Add(ClaimsManager.Admin, EClaimPermissions.Create | EClaimPermissions.Read | EClaimPermissions.Update | EClaimPermissions.Delete);
+                .Add(
+
+                    ClaimsManager.Admin, EClaimPermissions.Create
+                    | EClaimPermissions.Read
+                    | EClaimPermissions.Update
+                    | EClaimPermissions.Delete
+
+                );
 
             await _usuarioRepository.AdicionarClaims(user, claims);
 
@@ -253,42 +289,28 @@ namespace GameShelf.Application.ApplicationServices.Services
             ResponseDTO response = new();
 
             PaginacaoValidator validator = new();
-            ValidationResult validationResult = validator.Validate(query);
+
+            ValidationResult validationResult = validator
+                .Validate(query);
 
             if (!validationResult.IsValid)
             {
 
-                response.AdicionarErros(validationResult);
+                response
+                    .AdicionarErros(validationResult);
+
                 return response;
 
             }
 
-            GetListagemClaimsUsuariosFilter filtro = query.Adapt<GetListagemClaimsUsuariosFilter>();
+            GetListagemClaimsUsuariosFilter filtro = UsuarioMappings
+                .MapFiltroListagemClaimsUsuarios(query);
 
             PaginatedProjection<UsuarioClaimsProjection> projection = await _usuarioRepository
                 .GetUsuariosClaimsPaginados(filtro);
 
-            List<UsuarioClaimsDTO> data = [..
-
-                projection
-                    .Listagem
-                    .Select(usuario => new UsuarioClaimsDTO()
-                    {
-                        Id = usuario.Id,
-                        Nome = usuario.Nome,
-                        Email = usuario.Email,
-                        Permissoes = [..
-
-                            usuario
-                            .Claims
-                            .Select(claim => new PermissoesDTO(claim))
-
-                        ]
-                    })
-
-            ];
-
-            response.AddData(data);
+            response
+                .AddData(UsuarioMappings.MapListagemClaimsUsuarios(projection));
 
             return response;
 

@@ -36,14 +36,15 @@ namespace GameShelf.Infrastructure.ExternalServices
             if (!response.IsSuccessStatusCode)
             {
 
-                result.SetStatusResult(false);
+                result.SetStatusResult(false, filter.page_size);
                 return result;
 
             }
 
             string json = await response.Content.ReadAsStringAsync();
+
             result = JsonSerializer.Deserialize<RawGListGamesResultProjection>(json);
-            result.SetStatusResult(true);
+            result.SetStatusResult(true, filter.page_size);
 
             return result;
 

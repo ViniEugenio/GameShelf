@@ -11,7 +11,6 @@ services.ConfigureMediatR();
 services.ConfigureApplicationServices();
 services.ConfigureRepositories();
 services.ConfigureIdentity();
-services.ConfigureMapster();
 services.ConfigureIOptionsConfigurations(builder.Configuration);
 services.ConfigureJWTAuthentication(builder.Configuration);
 services.ConfigureExternalServices();

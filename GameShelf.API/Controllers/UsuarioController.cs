@@ -9,20 +9,14 @@ using GameShelf.Application.CQRS.Queries.GetUsuario;
 using GameShelf.Domain.Enums;
 using GameShelf.Domain.Models.Security;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameShelf.API.Controllers
 {
 
     [Route("/api/user")]
-    public class UsuarioController : BaseController
+    public class UsuarioController(IMediator mediator) : BaseController(mediator)
     {
-
-        public UsuarioController(IMediator mediator) : base(mediator)
-        {
-        }
-
         [HttpPost]
         public async Task<IActionResult> CadastrarUsuario([FromBody] CadastrarUsuarioCommand command)
         {

@@ -5,12 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace GameShelf.API.Controllers
 {
     [Route("/api/jogo")]
-    public class JogoController : BaseController
+    public class JogoController(IMediator mediator) : BaseController(mediator)
     {
-
-        public JogoController(IMediator mediator) : base(mediator)
-        {
-        }
 
         [HttpPost]
         public async Task<IActionResult> AtualizarJogos()

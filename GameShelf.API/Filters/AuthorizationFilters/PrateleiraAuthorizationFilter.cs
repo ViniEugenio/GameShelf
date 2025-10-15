@@ -1,7 +1,6 @@
 ﻿using GameShelf.Application.CQRS.Queries.UsuarioEhParticipantePrateleira;
 using GameShelf.Application.CQRS.Validators.ErrorMessages;
 using GameShelf.Application.DTOs;
-using GameShelf.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

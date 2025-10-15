@@ -1,19 +1,13 @@
 ﻿using GameShelf.API.Filters.AuthorizationFilters;
 using GameShelf.Application.CQRS.Commands.CriarPrateleira;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameShelf.API.Controllers
 {
     [Route("/api/prateleira")]
-    public class PrateleiraController : BaseController
+    public class PrateleiraController(IMediator mediator) : BaseController(mediator)
     {
-
-        public PrateleiraController(IMediator mediator) : base(mediator)
-        {
-        }
-
         [HttpPost]
         [UsuarioLogadoAuthorize]
         public async Task<IActionResult> CriarPrateleira(CriarPrateleiraCommand command)

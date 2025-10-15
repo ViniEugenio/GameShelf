@@ -4,15 +4,10 @@ using MediatR;
 
 namespace GameShelf.Application.CQRS.Commands.CriarPrateleira
 {
-    public class CriarPrateleiraCommandHandler : IRequestHandler<CriarPrateleiraCommand, ResponseDTO>
+    public class CriarPrateleiraCommandHandler(IPrateleiraService prateleiraService) : IRequestHandler<CriarPrateleiraCommand, ResponseDTO>
     {
 
-        private readonly IPrateleiraService _prateleiraService;
-
-        public CriarPrateleiraCommandHandler(IPrateleiraService prateleiraService)
-        {
-            _prateleiraService = prateleiraService;
-        }
+        private readonly IPrateleiraService _prateleiraService = prateleiraService;
 
         public async Task<ResponseDTO> Handle(CriarPrateleiraCommand request, CancellationToken cancellationToken)
         {

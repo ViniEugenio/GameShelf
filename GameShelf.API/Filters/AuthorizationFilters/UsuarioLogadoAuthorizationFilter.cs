@@ -1,6 +1,5 @@
 ﻿using GameShelf.Application.CQRS.Validators.ErrorMessages;
 using GameShelf.Application.DTOs;
-using GameShelf.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 

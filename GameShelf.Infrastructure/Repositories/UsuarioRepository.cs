@@ -11,17 +11,11 @@ using System.Security.Claims;
 
 namespace GameShelf.Infrastructure.Repositories
 {
-    public class UsuarioRepository : BaseRepository<User>, IUsuarioRepository
+    public class UsuarioRepository(Context context, UserManager<User> userManager, SignInManager<User> signInManager) : BaseRepository<User>(context), IUsuarioRepository
     {
 
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-
-        public UsuarioRepository(Context context, UserManager<User> userManager, SignInManager<User> signInManager) : base(context)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+        private readonly UserManager<User> _userManager = userManager;
+        private readonly SignInManager<User> _signInManager = signInManager;
 
         public async Task<IdentityResult> CadastrarUsuario(User user, string password)
         {

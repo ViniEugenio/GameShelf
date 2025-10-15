@@ -4,15 +4,10 @@ using MediatR;
 
 namespace GameShelf.Application.CQRS.Queries.GetListagemUsuarios
 {
-    public class GetListagemUsuariosQueryHandler : IRequestHandler<GetListagemUsuariosQuery, ResponseDTO>
+    public class GetListagemUsuariosQueryHandler(IUsuarioService usuarioService) : IRequestHandler<GetListagemUsuariosQuery, ResponseDTO>
     {
 
-        private readonly IUsuarioService _usuarioService;
-
-        public GetListagemUsuariosQueryHandler(IUsuarioService usuarioService)
-        {
-            _usuarioService = usuarioService;
-        }
+        private readonly IUsuarioService _usuarioService = usuarioService;
 
         public async Task<ResponseDTO> Handle(GetListagemUsuariosQuery request, CancellationToken cancellationToken)
         {

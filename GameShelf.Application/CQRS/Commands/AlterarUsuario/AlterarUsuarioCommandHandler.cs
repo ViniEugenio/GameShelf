@@ -4,15 +4,10 @@ using MediatR;
 
 namespace GameShelf.Application.CQRS.Commands.AlterarUsuario
 {
-    public class AlterarUsuarioCommandHandler : IRequestHandler<AlterarUsuarioCommand, ResponseDTO>
+    public class AlterarUsuarioCommandHandler(IUsuarioService usuarioService) : IRequestHandler<AlterarUsuarioCommand, ResponseDTO>
     {
 
-        private readonly IUsuarioService _usuarioService;
-
-        public AlterarUsuarioCommandHandler(IUsuarioService usuarioService)
-        {
-            _usuarioService = usuarioService;
-        }
+        private readonly IUsuarioService _usuarioService = usuarioService;
 
         public async Task<ResponseDTO> Handle(AlterarUsuarioCommand request, CancellationToken cancellationToken)
         {

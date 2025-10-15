@@ -4,15 +4,10 @@ using MediatR;
 
 namespace GameShelf.Application.CQRS.Commands.DesativarUsuario
 {
-    public class DesativarUsuarioCommandHandler : IRequestHandler<DesativarUsuarioCommand, ResponseDTO>
+    public class DesativarUsuarioCommandHandler(IUsuarioService usuarioService) : IRequestHandler<DesativarUsuarioCommand, ResponseDTO>
     {
 
-        private readonly IUsuarioService _usuarioService;
-
-        public DesativarUsuarioCommandHandler(IUsuarioService usuarioService)
-        {
-            _usuarioService = usuarioService;
-        }
+        private readonly IUsuarioService _usuarioService = usuarioService;
 
         public async Task<ResponseDTO> Handle(DesativarUsuarioCommand request, CancellationToken cancellationToken)
         {

@@ -6,15 +6,10 @@ namespace GameShelf.API.Controllers
 {
 
     [ApiController]
-    public abstract class BaseController : ControllerBase
+    public abstract class BaseController(IMediator mediator) : ControllerBase
     {
 
-        private readonly IMediator _mediator;
-
-        public BaseController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        private readonly IMediator _mediator = mediator;
 
         protected async Task<IActionResult> Respond(IRequest<ResponseDTO> request)
         {

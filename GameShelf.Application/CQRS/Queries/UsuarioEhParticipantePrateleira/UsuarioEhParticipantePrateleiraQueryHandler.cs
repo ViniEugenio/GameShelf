@@ -3,15 +3,10 @@ using MediatR;
 
 namespace GameShelf.Application.CQRS.Queries.UsuarioEhParticipantePrateleira
 {
-    public class UsuarioEhParticipantePrateleiraQueryHandler : IRequestHandler<UsuarioEhParticipantePrateleiraQuery, bool>
+    public class UsuarioEhParticipantePrateleiraQueryHandler(IPrateleiraService prateleiraService) : IRequestHandler<UsuarioEhParticipantePrateleiraQuery, bool>
     {
 
-        private readonly IPrateleiraService _prateleiraService;
-
-        public UsuarioEhParticipantePrateleiraQueryHandler(IPrateleiraService prateleiraService)
-        {
-            _prateleiraService = prateleiraService;
-        }
+        private readonly IPrateleiraService _prateleiraService = prateleiraService;
 
         public async Task<bool> Handle(UsuarioEhParticipantePrateleiraQuery request, CancellationToken cancellationToken)
         {

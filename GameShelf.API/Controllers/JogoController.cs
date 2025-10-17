@@ -8,7 +8,7 @@ namespace GameShelf.API.Controllers
     public class JogoController(IMediator mediator) : BaseController(mediator)
     {
 
-        [HttpPost]
+        [HttpPost("AtualizarJogos")]
         public async Task<IActionResult> AtualizarJogos()
         {
             return await Respond(new AtualizarJogosCommand());

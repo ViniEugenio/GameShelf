@@ -8,7 +8,9 @@ namespace GameShelf.API.Configurations
 
         public static void ConfigureExternalServices(this IServiceCollection services)
         {
-            services.AddScoped<IRawGService, RawGService>();
+
+            services.AddSingleton<IMessageBus, MessageBus>();
+
         }
 
     }

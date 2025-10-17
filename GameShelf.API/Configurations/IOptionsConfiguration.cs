@@ -1,4 +1,4 @@
-﻿using GameShelf.Application.DTOs.RawGDTO;
+﻿using GameShelf.Application.DTOs.MessageBusDTO;
 using GameShelf.Application.DTOs.UsuarioDTO;
 
 namespace GameShelf.API.Configurations
@@ -13,7 +13,7 @@ namespace GameShelf.API.Configurations
                 .Configure<JwtDTO>(configuration.GetSection("JWTConfiguration"));
 
             services
-                .Configure<RawGConfigurationDTO>(configuration.GetSection("RawGConfiguration"));
+                .Configure<RabbitMQDTO>(configuration.GetSection("RabbitMQConfiguration"));
 
         }
 

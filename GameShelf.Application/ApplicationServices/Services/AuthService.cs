@@ -24,7 +24,7 @@ namespace GameShelf.Application.ApplicationServices.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 SigningCredentials = credentials,
-                Expires = DateTime.Now.AddHours(_jwtConfiguration.ExpireHours),
+                Expires = DateTime.UtcNow.AddHours(_jwtConfiguration.ExpireHours),
                 Subject = claimsIdentity,
                 Issuer = _jwtConfiguration.Issuer,
                 Audience = _jwtConfiguration.Audience

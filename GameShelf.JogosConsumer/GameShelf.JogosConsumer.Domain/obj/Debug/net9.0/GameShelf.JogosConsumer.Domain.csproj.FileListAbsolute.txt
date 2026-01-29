@@ -1,0 +1,12 @@
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\bin\Debug\net9.0\GameShelf.JogosConsumer.Domain.deps.json
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\bin\Debug\net9.0\GameShelf.JogosConsumer.Domain.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\bin\Debug\net9.0\GameShelf.JogosConsumer.Domain.pdb
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\obj\Debug\net9.0\GameShelf.JogosConsumer.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\obj\Debug\net9.0\GameShelf.JogosConsumer.Domain.AssemblyInfoInputs.cache
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\obj\Debug\net9.0\GameShelf.JogosConsumer.Domain.AssemblyInfo.cs
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\obj\Debug\net9.0\GameShelf.JogosConsumer.Domain.csproj.CoreCompileInputs.cache
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\obj\Debug\net9.0\GameShelf.JogosConsumer.Domain.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\obj\Debug\net9.0\refint\GameShelf.JogosConsumer.Domain.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\obj\Debug\net9.0\GameShelf.JogosConsumer.Domain.pdb
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\obj\Debug\net9.0\ref\GameShelf.JogosConsumer.Domain.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Domain\obj\Debug\net9.0\GameShelf.JogosConsumer.Domain.csproj.AssemblyReference.cache

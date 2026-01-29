@@ -1,0 +1,15 @@
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\bin\Debug\net9.0\GameShelf.JogosConsumer.Application.deps.json
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\bin\Debug\net9.0\GameShelf.JogosConsumer.Application.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\bin\Debug\net9.0\GameShelf.JogosConsumer.Application.pdb
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShelf.JogosConsumer.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShelf.JogosConsumer.Application.AssemblyInfoInputs.cache
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShelf.JogosConsumer.Application.AssemblyInfo.cs
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShelf.JogosConsumer.Application.csproj.CoreCompileInputs.cache
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShelf.JogosConsumer.Application.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\refint\GameShelf.JogosConsumer.Application.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShelf.JogosConsumer.Application.pdb
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\ref\GameShelf.JogosConsumer.Application.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShelf.JogosConsumer.Application.csproj.AssemblyReference.cache
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\bin\Debug\net9.0\GameShelf.JogosConsumer.Domain.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\bin\Debug\net9.0\GameShelf.JogosConsumer.Domain.pdb
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShel.99BA7DA9.Up2Date

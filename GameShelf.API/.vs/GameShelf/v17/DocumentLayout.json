@@ -1,0 +1,317 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\reps\\GameShelf\\GameShelf.API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\persistence\\migrations\\20260129020946_fixinboxtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\persistence\\migrations\\20260129020946_fixinboxtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\persistence\\mappings\\inboxmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\persistence\\mappings\\inboxmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74145C47-E2A5-4A9A-9DB2-AECC4D34828F}|GameShelf.Domain\\GameShelf.Domain.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.domain\\entities\\outbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74145C47-E2A5-4A9A-9DB2-AECC4D34828F}|GameShelf.Domain\\GameShelf.Domain.csproj|solutionrelative:gameshelf.domain\\entities\\outbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74145C47-E2A5-4A9A-9DB2-AECC4D34828F}|GameShelf.Domain\\GameShelf.Domain.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.domain\\entities\\inbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74145C47-E2A5-4A9A-9DB2-AECC4D34828F}|GameShelf.Domain\\GameShelf.Domain.csproj|solutionrelative:gameshelf.domain\\entities\\inbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\repositories\\outboxrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\repositories\\outboxrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0F20BA0-366A-43A4-89F8-99C2E800CDC6}|GameShelf.Application\\GameShelf.Application.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.application\\applicationservices\\services\\outboxservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0F20BA0-366A-43A4-89F8-99C2E800CDC6}|GameShelf.Application\\GameShelf.Application.csproj|solutionrelative:gameshelf.application\\applicationservices\\services\\outboxservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\persistence\\context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\persistence\\context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\persistence\\sets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\persistence\\sets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\externalservices\\messagebus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\externalservices\\messagebus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFCB04A2-E0CC-40ED-AB19-C2A270E7F1F7}|GameShelf.API\\GameShelf.API.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.api\\configurations\\repositoriesconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFCB04A2-E0CC-40ED-AB19-C2A270E7F1F7}|GameShelf.API\\GameShelf.API.csproj|solutionrelative:gameshelf.api\\configurations\\repositoriesconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\repositories\\prateleirarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\repositories\\prateleirarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\repositories\\plataformarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\repositories\\plataformarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\repositories\\jogorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\repositories\\jogorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\repositories\\generorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\repositories\\generorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFCB04A2-E0CC-40ED-AB19-C2A270E7F1F7}|GameShelf.API\\GameShelf.API.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.api\\backgroundservices\\setupqueueshostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFCB04A2-E0CC-40ED-AB19-C2A270E7F1F7}|GameShelf.API\\GameShelf.API.csproj|solutionrelative:gameshelf.api\\backgroundservices\\setupqueueshostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFCB04A2-E0CC-40ED-AB19-C2A270E7F1F7}|GameShelf.API\\GameShelf.API.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.api\\backgroundservices\\publicadormensagensbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFCB04A2-E0CC-40ED-AB19-C2A270E7F1F7}|GameShelf.API\\GameShelf.API.csproj|solutionrelative:gameshelf.api\\backgroundservices\\publicadormensagensbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\persistence\\migrations\\20260129011459_inboxtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\persistence\\migrations\\20260129011459_inboxtable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20260129020946_FixInboxTable.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Migrations\\20260129020946_FixInboxTable.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Persistence\\Migrations\\20260129020946_FixInboxTable.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Migrations\\20260129020946_FixInboxTable.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Persistence\\Migrations\\20260129020946_FixInboxTable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T02:09:46.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Context.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Context.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Persistence\\Context.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Context.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Persistence\\Context.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T01:46:42.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Sets.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Sets.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Persistence\\Sets.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Sets.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Persistence\\Sets.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T01:17:28.227Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "20260129011459_InboxTable.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Migrations\\20260129011459_InboxTable.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Persistence\\Migrations\\20260129011459_InboxTable.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Migrations\\20260129011459_InboxTable.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Persistence\\Migrations\\20260129011459_InboxTable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T01:14:59.408Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InboxMap.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Mappings\\InboxMap.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Persistence\\Mappings\\InboxMap.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Mappings\\InboxMap.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Persistence\\Mappings\\InboxMap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T01:06:09.701Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OutboxRepository.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\OutboxRepository.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Repositories\\OutboxRepository.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\OutboxRepository.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Repositories\\OutboxRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwCMAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T01:04:32.133Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Outbox.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Domain\\Entities\\Outbox.cs",
+              "RelativeDocumentMoniker": "GameShelf.Domain\\Entities\\Outbox.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Domain\\Entities\\Outbox.cs",
+              "RelativeToolTip": "GameShelf.Domain\\Entities\\Outbox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T01:03:49.173Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Inbox.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Domain\\Entities\\Inbox.cs",
+              "RelativeDocumentMoniker": "GameShelf.Domain\\Entities\\Inbox.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Domain\\Entities\\Inbox.cs",
+              "RelativeToolTip": "GameShelf.Domain\\Entities\\Inbox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T01:03:37.122Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RepositoriesConfiguration.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.API\\Configurations\\RepositoriesConfiguration.cs",
+              "RelativeDocumentMoniker": "GameShelf.API\\Configurations\\RepositoriesConfiguration.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.API\\Configurations\\RepositoriesConfiguration.cs",
+              "RelativeToolTip": "GameShelf.API\\Configurations\\RepositoriesConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:54:56.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PrateleiraRepository.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\PrateleiraRepository.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Repositories\\PrateleiraRepository.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\PrateleiraRepository.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Repositories\\PrateleiraRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:54:28.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PlataformaRepository.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\PlataformaRepository.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Repositories\\PlataformaRepository.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\PlataformaRepository.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Repositories\\PlataformaRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:54:25.58Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "JogoRepository.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\JogoRepository.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Repositories\\JogoRepository.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\JogoRepository.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Repositories\\JogoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:54:04.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BaseRepository.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\BaseRepository.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Repositories\\BaseRepository.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\BaseRepository.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Repositories\\BaseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwC8AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:53:31.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "GeneroRepository.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\GeneroRepository.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Repositories\\GeneroRepository.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Repositories\\GeneroRepository.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Repositories\\GeneroRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:53:27.647Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SetupQueuesHostedService.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.API\\BackgroundServices\\SetupQueuesHostedService.cs",
+              "RelativeDocumentMoniker": "GameShelf.API\\BackgroundServices\\SetupQueuesHostedService.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.API\\BackgroundServices\\SetupQueuesHostedService.cs",
+              "RelativeToolTip": "GameShelf.API\\BackgroundServices\\SetupQueuesHostedService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:42:26.314Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OutboxService.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Application\\ApplicationServices\\Services\\OutboxService.cs",
+              "RelativeDocumentMoniker": "GameShelf.Application\\ApplicationServices\\Services\\OutboxService.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Application\\ApplicationServices\\Services\\OutboxService.cs",
+              "RelativeToolTip": "GameShelf.Application\\ApplicationServices\\Services\\OutboxService.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAlwEwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:13:38.472Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MessageBus.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\ExternalServices\\MessageBus.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\ExternalServices\\MessageBus.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\ExternalServices\\MessageBus.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\ExternalServices\\MessageBus.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:12:44.963Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "PublicadorMensagensBackgroundService.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.API\\BackgroundServices\\PublicadorMensagensBackgroundService.cs",
+              "RelativeDocumentMoniker": "GameShelf.API\\BackgroundServices\\PublicadorMensagensBackgroundService.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.API\\BackgroundServices\\PublicadorMensagensBackgroundService.cs",
+              "RelativeToolTip": "GameShelf.API\\BackgroundServices\\PublicadorMensagensBackgroundService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T01:07:02.936Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameShelf.JogosConsumer.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f5b0bdd2b50b8a1e7c66e6a259c1bc4ff1b0883")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameShelf.JogosConsumer.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameShelf.JogosConsumer.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

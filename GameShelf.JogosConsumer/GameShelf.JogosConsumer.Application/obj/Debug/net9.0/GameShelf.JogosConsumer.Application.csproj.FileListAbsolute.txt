@@ -13,3 +13,4 @@ D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\ob
 D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\bin\Debug\net9.0\GameShelf.JogosConsumer.Domain.dll
 D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\bin\Debug\net9.0\GameShelf.JogosConsumer.Domain.pdb
 D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShel.99BA7DA9.Up2Date
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.Application\obj\Debug\net9.0\GameShelf.JogosConsumer.Application.sourcelink.json

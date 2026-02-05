@@ -1,42 +1,43 @@
 ﻿using GameShelf.JogosConsumer.Domain.Entities;
 using GameShelf.JogosConsumer.Domain.Interfaces.Repositories;
-using GameShelf.JogosConsumer.Domain.Projections.RawG;
+using GameShelf.JogosConsumer.Domain.Projections.Genero;
 using GameShelf.JogosConsumer.Infrastructure.Persistence;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace GameShelf.JogosConsumer.Infrastructure.Repositories
 {
     public class GeneroRepository(Context context) : BaseRepository<Genero>(context), IGeneroRepository
     {
-        public async Task<List<string>> FiltrarGenerosNaoCadastrados(List<RawGGenreProjection> generos)
+        public async Task<List<string>> FiltrarGenerosNaoCadastrados(List<string> generos)
         {
+
+            string generosJson = JsonSerializer.Serialize(generos);
+
+            string query = @"
+
+                select 
+
+                    generoVerificacao.value
+
+                from OPENJSON(@generosJson) generoVerificacao
+                left join Genero genero on generoVerificacao.value = genero.Nome
+
+                where
+
+                    genero.Id is null
+
+            ";
 
             return await _context
                 .Database
-                .SqlQuery<string>($@"
-
-                    declare @generosVerificacao table (Nome varchar(max))
-
-                    insert into @generosVerificacao values {string.Join(",", generos.Select(genero => $"('{genero.Name}')"))}
-
-                    select 
-
-	                    generosVerificacao.Nome 
-	
-                    from @generosVerificacao generoVerificacao
-
-	                    left join Genero genero on generoVerificacao.Nome = genero.Nome
-
-                    where 
-
-	                    genero.Id is null
-
-                ")
+                .SqlQueryRaw<string>(query, new SqlParameter("@generosJson", generosJson))
                 .ToListAsync();
 
         }
 
-        public async Task<List<Guid>> GetIdsGenerosFiltradosPorNome(List<string> nomesGeneros)
+        public async Task<List<GeneroJaCadastradoProjection>> GetGenerosFiltradosPorNome(List<string> nomesGeneros)
         {
 
             return await _dbSet
@@ -46,7 +47,7 @@ namespace GameShelf.JogosConsumer.Infrastructure.Repositories
                     && genero.Ativo
 
                 )
-                .Select(genero => genero.Id)
+                .Select(genero => new GeneroJaCadastradoProjection(genero.Id, genero.Nome))
                 .ToListAsync();
 
         }

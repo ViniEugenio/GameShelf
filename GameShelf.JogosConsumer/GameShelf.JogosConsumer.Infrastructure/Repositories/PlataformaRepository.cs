@@ -1,6 +1,6 @@
 ﻿using GameShelf.JogosConsumer.Domain.Entities;
 using GameShelf.JogosConsumer.Domain.Interfaces.Repositories;
-using GameShelf.JogosConsumer.Domain.Projections.RawG;
+using GameShelf.JogosConsumer.Domain.Projections.Plataforma;
 using GameShelf.JogosConsumer.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +8,7 @@ namespace GameShelf.JogosConsumer.Infrastructure.Repositories
 {
     public class PlataformaRepository(Context context) : BaseRepository<Plataforma>(context), IPlataformaRepository
     {
-        public async Task<List<string>> FiltrarPlataformasNaoCadastradas(List<RawGPlatformDetailsProjection> plataformas)
+        public async Task<List<string>> FiltrarPlataformasNaoCadastradas(List<string> plataformas)
         {
 
             return await _context
@@ -17,7 +17,7 @@ namespace GameShelf.JogosConsumer.Infrastructure.Repositories
 
                     declare @plataformasVerificacao table (Nome varchar(max))
 
-                    insert into @plataformasVerificacao values {string.Join(",", plataformas.Select(plataforma => $"('{plataforma.Platform.Name}')"))}
+                    insert into @plataformasVerificacao values {string.Join(",", plataformas)}
 
                     select 
 
@@ -36,5 +36,19 @@ namespace GameShelf.JogosConsumer.Infrastructure.Repositories
 
         }
 
+        public async Task<List<PlataformaJaCadastradaProjection>> GetPlataformasFiltradasPorNome(List<string> plataformas)
+        {
+
+            return await _dbSet
+                .Where(plataforma =>
+
+                    plataformas.Contains(plataforma.Nome)
+                    && plataforma.Ativo
+
+                )
+                .Select(plataforma => new PlataformaJaCadastradaProjection(plataforma.Id, plataforma.Nome))
+                .ToListAsync();
+
+        }
     }
 }

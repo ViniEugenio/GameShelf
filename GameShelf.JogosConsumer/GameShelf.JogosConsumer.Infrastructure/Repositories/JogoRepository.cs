@@ -8,7 +8,7 @@ namespace GameShelf.JogosConsumer.Infrastructure.Repositories
 {
     public class JogoRepository(Context context) : BaseRepository<Jogo>(context), IJogoRepository
     {
-        public async Task<List<string>> FiltrarJogosNaoCadastrados(List<RawGGameProjection> jogos)
+        public async Task<List<string>> FiltrarJogosNaoCadastrados(List<string> jogos)
         {
 
             return await _context
@@ -17,7 +17,7 @@ namespace GameShelf.JogosConsumer.Infrastructure.Repositories
 
                     declare @jogosVerificacao table (Nome varchar(max))
 
-                    insert into @jogosVerificacao values {string.Join(",", jogos.Select(jogo => $"('{jogo.Name}')"))}
+                    insert into @jogosVerificacao values {string.Join(",", jogos)}
 
                     select 
 

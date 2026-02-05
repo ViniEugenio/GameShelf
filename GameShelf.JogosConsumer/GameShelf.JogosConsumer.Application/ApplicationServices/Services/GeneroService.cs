@@ -2,7 +2,7 @@
 using GameShelf.JogosConsumer.Application.DTOs.Jogos;
 using GameShelf.JogosConsumer.Domain.Entities;
 using GameShelf.JogosConsumer.Domain.Interfaces.Repositories;
-using GameShelf.JogosConsumer.Domain.Projections.RawG;
+using GameShelf.JogosConsumer.Domain.Projections.Genero;
 
 namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
 {
@@ -11,16 +11,21 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
 
         private readonly IGeneroRepository _generoRepository = generoRepository;
 
-        public async Task CadastrarNovosGeneros(List<InfosAindaNaoCadastradasDTO> infosAindaNaoCadastradas)
+        public async Task<List<AtualizarJogosAuxiliarDTO>> CadastrarNovosGeneros(List<string> generos)
         {
+
+            if (generos.Count == 0)
+            {
+                return [];
+            }
 
             List<Genero> novosGeneros = [..
 
-                infosAindaNaoCadastradas
-                    .SelectMany(info => info.GenerosAindaNaoCadastrados)
+                generos
                     .Distinct()
                     .Select(genero => new Genero()
                     {
+                        Id = Guid.NewGuid(),
                         Nome = genero,
                         Ativo = true,
                         DataAtivacao = DateTime.UtcNow
@@ -28,39 +33,45 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
 
             ];
 
-            if (novosGeneros.Count == 0)
-            {
-                return;
-            }
-
             await _generoRepository
                 .BulkingInsert(novosGeneros);
 
+            return [..
+
+                novosGeneros
+                    .Select(genero => new AtualizarJogosAuxiliarDTO(genero.Id, genero.Nome))
+
+            ];
+
         }
 
-        public async Task<List<string>> FiltrarGenerosAindaNaoCadastrados(List<RawGGenreProjection> generos)
+        public async Task<List<string>> FiltrarGenerosAindaNaoCadastrados(List<string> generos)
         {
             return await _generoRepository.FiltrarGenerosNaoCadastrados(generos);
         }
 
-        public async Task<List<Guid>> GetIdsGenerosFiltradosPorNome(List<InfosAindaNaoCadastradasDTO> infosAindaNaoCadastradas)
+        public async Task<List<AtualizarJogosAuxiliarDTO>> GetGenerosFiltradosPorNome(List<string> generos)
         {
 
-            List<string> novosGeneros = [..
-
-                infosAindaNaoCadastradas
-                    .SelectMany(info => info.GenerosAindaNaoCadastrados)
-                    .Distinct()
-
-            ];
-
-            if (novosGeneros.Count == 0)
+            if (generos.Count == 0)
             {
                 return [];
             }
 
-            return await _generoRepository
-                .GetIdsGenerosFiltradosPorNome(novosGeneros);
+            generos = [..
+                generos
+                    .Distinct()
+            ];
+
+            List<GeneroJaCadastradoProjection> projection = await _generoRepository
+                .GetGenerosFiltradosPorNome(generos);
+
+            return [..
+
+                projection
+                    .Select(genero => new AtualizarJogosAuxiliarDTO(genero.Id, genero.Name))
+
+            ];
 
         }
     }

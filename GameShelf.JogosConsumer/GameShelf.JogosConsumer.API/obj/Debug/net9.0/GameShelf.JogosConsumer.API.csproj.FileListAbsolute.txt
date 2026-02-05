@@ -215,3 +215,4 @@ D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.API\bin\Debug\
 D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.API\bin\Debug\net9.0\runtimes\osx\lib\net8.0\System.DirectoryServices.Protocols.dll
 D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.API\bin\Debug\net9.0\runtimes\win\lib\net8.0\System.DirectoryServices.Protocols.dll
 D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.API\bin\Debug\net9.0\runtimes\win\lib\net9.0\System.Security.Cryptography.Pkcs.dll
+D:\reps\GameShelf\GameShelf.JogosConsumer\GameShelf.JogosConsumer.API\obj\Debug\net9.0\GameShelf.JogosConsumer.API.sourcelink.json

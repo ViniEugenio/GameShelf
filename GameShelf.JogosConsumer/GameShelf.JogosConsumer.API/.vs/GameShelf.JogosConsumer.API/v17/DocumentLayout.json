@@ -3,7 +3,19 @@
   "WorkspaceRootPath": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{380A3302-C877-4BE2-83C8-B6227C961F19}|..\\GameShelf.JogosConsumer.Infrastructure\\GameShelf.JogosConsumer.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.jogosconsumer\\gameshelf.jogosconsumer.infrastructure\\externalservices\\messagebus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4D6F4BA4-69FB-4A2C-92F1-6BF71809FDF6}|..\\GameShelf.JogosConsumer.Application\\GameShelf.JogosConsumer.Application.csproj|d:\\reps\\gameshelf\\gameshelf.jogosconsumer\\gameshelf.jogosconsumer.application\\applicationservices\\services\\generoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D6F4BA4-69FB-4A2C-92F1-6BF71809FDF6}|..\\GameShelf.JogosConsumer.Application\\GameShelf.JogosConsumer.Application.csproj|d:\\reps\\gameshelf\\gameshelf.jogosconsumer\\gameshelf.jogosconsumer.application\\applicationservices\\services\\jogoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{380A3302-C877-4BE2-83C8-B6227C961F19}|..\\GameShelf.JogosConsumer.Infrastructure\\GameShelf.JogosConsumer.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.jogosconsumer\\gameshelf.jogosconsumer.infrastructure\\persistence\\context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{380A3302-C877-4BE2-83C8-B6227C961F19}|..\\GameShelf.JogosConsumer.Infrastructure\\GameShelf.JogosConsumer.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.jogosconsumer\\gameshelf.jogosconsumer.infrastructure\\persistence\\mappings\\outboxmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{380A3302-C877-4BE2-83C8-B6227C961F19}|..\\GameShelf.JogosConsumer.Infrastructure\\GameShelf.JogosConsumer.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.jogosconsumer\\gameshelf.jogosconsumer.infrastructure\\persistence\\mappings\\inboxmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,14 +38,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MessageBus.cs",
-              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Infrastructure\\ExternalServices\\MessageBus.cs",
-              "RelativeDocumentMoniker": "..\\GameShelf.JogosConsumer.Infrastructure\\ExternalServices\\MessageBus.cs",
-              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Infrastructure\\ExternalServices\\MessageBus.cs",
-              "RelativeToolTip": "..\\GameShelf.JogosConsumer.Infrastructure\\ExternalServices\\MessageBus.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAgwEEAAAAUAAAAAAAAAA==",
+              "Title": "GeneroService.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Application\\ApplicationServices\\Services\\GeneroService.cs",
+              "RelativeDocumentMoniker": "..\\GameShelf.JogosConsumer.Application\\ApplicationServices\\Services\\GeneroService.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Application\\ApplicationServices\\Services\\GeneroService.cs",
+              "RelativeToolTip": "..\\GameShelf.JogosConsumer.Application\\ApplicationServices\\Services\\GeneroService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwCIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-29T02:11:27.269Z",
+              "WhenOpened": "2026-02-05T02:00:12.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OutboxMap.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Mappings\\OutboxMap.cs",
+              "RelativeDocumentMoniker": "..\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Mappings\\OutboxMap.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Mappings\\OutboxMap.cs",
+              "RelativeToolTip": "..\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Mappings\\OutboxMap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T01:55:12.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InboxMap.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Mappings\\InboxMap.cs",
+              "RelativeDocumentMoniker": "..\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Mappings\\InboxMap.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Mappings\\InboxMap.cs",
+              "RelativeToolTip": "..\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Mappings\\InboxMap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T01:54:54.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Context.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Context.cs",
+              "RelativeDocumentMoniker": "..\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Context.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Context.cs",
+              "RelativeToolTip": "..\\GameShelf.JogosConsumer.Infrastructure\\Persistence\\Context.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T01:54:18.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JogoService.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Application\\ApplicationServices\\Services\\JogoService.cs",
+              "RelativeDocumentMoniker": "..\\GameShelf.JogosConsumer.Application\\ApplicationServices\\Services\\JogoService.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.JogosConsumer\\GameShelf.JogosConsumer.Application\\ApplicationServices\\Services\\JogoService.cs",
+              "RelativeToolTip": "..\\GameShelf.JogosConsumer.Application\\ApplicationServices\\Services\\JogoService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAuwFoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T22:12:57.763Z",
               "EditorCaption": ""
             }
           ]

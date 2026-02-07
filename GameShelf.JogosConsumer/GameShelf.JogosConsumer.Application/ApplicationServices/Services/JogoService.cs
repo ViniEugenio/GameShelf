@@ -14,7 +14,9 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
         IRawGService rawGService,
         IJogoRepository jogoRepository,
         IGeneroService generoService,
-        IPlataformaService plataformaService) : IJogoService
+        IPlataformaService plataformaService,
+        IJogoGeneroService jogoGeneroService,
+        IJogoPlataformaService jogoPlataformaService) : IJogoService
     {
 
         private readonly IRawGService _rawGService = rawGService;
@@ -22,6 +24,8 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
         private readonly IJogoRepository _jogoRepository = jogoRepository;
         private readonly IGeneroService _generoService = generoService;
         private readonly IPlataformaService _plataformaService = plataformaService;
+        private readonly IJogoGeneroService _jogoGeneroService = jogoGeneroService;
+        private readonly IJogoPlataformaService _jogoPlataformaService = jogoPlataformaService;
 
         private readonly List<AtualizarJogosAuxiliarDTO> _generosAuxiliar = [];
         private readonly List<AtualizarJogosAuxiliarDTO> _plataformasAuxiliar = [];
@@ -134,7 +138,7 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
             }
 
             List<string> plataformasAindaNaoCadastradas = await _plataformaService.FiltrarPlataformasAindaNaoCadastradas(plataformas);
-            List<AtualizarJogosAuxiliarDTO> novasPlataformasCadastradas = await _plataformaService.CadastrarNovasPlataformas(plataformas);
+            List<AtualizarJogosAuxiliarDTO> novasPlataformasCadastradas = await _plataformaService.CadastrarNovasPlataformas(plataformasAindaNaoCadastradas);
             _plataformasAuxiliar.AddRange(novasPlataformasCadastradas);
 
             List<string> nomesPlataformasJaCadastradas = [..
@@ -152,17 +156,31 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
         private async Task CadastrarNovosJogos(RawGListGamesResultProjection gameResult)
         {
 
+            List<JogoGenero> generosJogos = [];
+            List<JogoPlataforma> plataformasJogos = [];
+
             List<Jogo> jogos = [..
 
                 gameResult
                     .Games
-                    .Select(game=> new Jogo()
+                    .Select(game=>
                     {
-                        Nome = game.Name,
-                        Descricao = game.Slug,
-                        Imagem = game.Image,
-                        Generos = GetGenerosJogoParaCadastro(game),
-                        Plataformas = GetPlataformasJogoParaCadastro(game)
+
+                        Guid idJogo = Guid.NewGuid();
+
+                        Jogo novoJogo = new()
+                        {
+                            Id = idJogo,
+                            Nome = game.Name,
+                            Descricao = game.Slug,
+                            Imagem = game.Image,
+                        };
+
+                        generosJogos.AddRange(GetGenerosJogoParaCadastro(idJogo, game));
+                        plataformasJogos.AddRange(GetPlataformasJogoParaCadastro(idJogo, game));
+
+                        return novoJogo;
+
                     })
 
             ];
@@ -172,12 +190,13 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
                 return;
             }
 
-            await _jogoRepository
-                .BulkingInsert(jogos);
+            await _jogoRepository.BulkingInsert(jogos);
+            await _jogoGeneroService.RelacionarGenerosJogos(generosJogos);
+            await _jogoPlataformaService.RelacionarPlataformasJogos(plataformasJogos);
 
         }
 
-        private List<JogoGenero> GetGenerosJogoParaCadastro(RawGGameProjection game)
+        private List<JogoGenero> GetGenerosJogoParaCadastro(Guid idJogoCadastrado, RawGGameProjection game)
         {
 
             return [..
@@ -193,14 +212,18 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
                     )
                     .Select(generoAuxiliar => new JogoGenero()
                     {
-                        GeneroId = generoAuxiliar.Id
+                        Id = Guid.NewGuid(),
+                        JogoId = idJogoCadastrado,
+                        GeneroId = generoAuxiliar.Id,
+                        DataAtivacao = DateTime.Now,
+                        Ativo = true
                     })
 
             ];
 
         }
 
-        private List<JogoPlataforma> GetPlataformasJogoParaCadastro(RawGGameProjection game)
+        private List<JogoPlataforma> GetPlataformasJogoParaCadastro(Guid idJogoCadastrado, RawGGameProjection game)
         {
 
             return [..
@@ -216,7 +239,11 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
                     )
                     .Select(generoAuxiliar => new JogoPlataforma()
                     {
-                        PlataformaId = generoAuxiliar.Id
+                        Id = Guid.NewGuid(),
+                        JogoId = idJogoCadastrado,
+                        PlataformaId = generoAuxiliar.Id,
+                        DataAtivacao = DateTime.Now,
+                        Ativo = true
                     })
 
             ];

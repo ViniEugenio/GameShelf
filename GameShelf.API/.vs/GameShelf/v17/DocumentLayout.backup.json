@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\reps\\GameShelf\\GameShelf.API\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\persistence\\mappings\\generomap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\persistence\\mappings\\generomap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +23,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GeneroMap.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Mappings\\GeneroMap.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Persistence\\Mappings\\GeneroMap.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Mappings\\GeneroMap.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Persistence\\Mappings\\GeneroMap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T01:47:22.884Z",
+              "EditorCaption": ""
             }
           ]
         }

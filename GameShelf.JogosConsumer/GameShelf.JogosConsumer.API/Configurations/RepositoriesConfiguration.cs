@@ -13,6 +13,8 @@ namespace GameShelf.JogosConsumer.API.Configurations
             services.AddScoped<IJogoRepository, JogoRepository>();
             services.AddScoped<IPlataformaRepository, PlataformaRepository>();
             services.AddScoped<IInboxRepository, InboxRepository>();
+            services.AddScoped<IJogoGeneroRepository, JogoGeneroRepository>();
+            services.AddScoped<IJogoPlataformaRepository, JogoPlataformaRepository>();
 
         }
 

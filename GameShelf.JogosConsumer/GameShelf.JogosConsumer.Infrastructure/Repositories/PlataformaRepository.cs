@@ -2,7 +2,9 @@
 using GameShelf.JogosConsumer.Domain.Interfaces.Repositories;
 using GameShelf.JogosConsumer.Domain.Projections.Plataforma;
 using GameShelf.JogosConsumer.Infrastructure.Persistence;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace GameShelf.JogosConsumer.Infrastructure.Repositories
 {
@@ -11,27 +13,26 @@ namespace GameShelf.JogosConsumer.Infrastructure.Repositories
         public async Task<List<string>> FiltrarPlataformasNaoCadastradas(List<string> plataformas)
         {
 
+            string jsonPlataformas = JsonSerializer.Serialize(plataformas);
+            string query = @"
+
+                select
+
+                    plataformaJson.value
+
+                from OPENJSON(@plataformaJson) plataformaJson
+
+                left join Plataforma plataforma on plataformaJson.value = plataforma.Nome
+
+                where 
+
+                    plataforma.Id is null
+
+            ";
+
             return await _context
                 .Database
-                .SqlQuery<string>($@"
-
-                    declare @plataformasVerificacao table (Nome varchar(max))
-
-                    insert into @plataformasVerificacao values {string.Join(",", plataformas)}
-
-                    select 
-
-	                    plataformaVerificacao.Nome 
-	
-                    from @plataformasVerificacao plataformaVerificacao
-
-	                    left join Plataforma plataforma on plataformaVerificacao.Nome = plataforma.Nome
-
-                    where 
-
-	                    plataforma.Id is null
-
-                ")
+                .SqlQueryRaw<string>(query, new SqlParameter("@plataformaJson", jsonPlataformas))
                 .ToListAsync();
 
         }

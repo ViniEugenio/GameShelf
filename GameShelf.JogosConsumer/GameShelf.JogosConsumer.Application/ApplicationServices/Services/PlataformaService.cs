@@ -25,6 +25,7 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
                     .Distinct()
                     .Select(plataforma => new Plataforma()
                     {
+                        Id = Guid.NewGuid(),
                         Nome = plataforma,
                         Ativo = true,
                         DataAtivacao = DateTime.UtcNow

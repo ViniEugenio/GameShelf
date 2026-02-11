@@ -1,6 +1,4 @@
-﻿
-using GameShelf.JogosConsumer.Domain.Enums;
-using GameShelf.JogosConsumer.Domain.Interfaces.ExternalServices;
+﻿using GameShelf.JogosConsumer.Domain.Interfaces.ExternalServices;
 
 namespace GameShelf.JogosConsumer.API.BackgroundServices
 {
@@ -11,7 +9,16 @@ namespace GameShelf.JogosConsumer.API.BackgroundServices
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await _messageBus.AtualizarJogosConsumer();
+
+            while (!stoppingToken.IsCancellationRequested)
+            {
+
+                await _messageBus.AtualizarJogosConsumer();
+
+                int tempoDeEsperaEmHoras = 24;
+                await Task.Delay(TimeSpan.FromHours(tempoDeEsperaEmHoras), stoppingToken);
+
+            }
         }
 
     }

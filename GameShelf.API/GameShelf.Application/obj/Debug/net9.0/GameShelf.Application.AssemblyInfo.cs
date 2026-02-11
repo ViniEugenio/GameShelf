@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameShelf.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b07e4b97bf120fab092cb3faef1d58dc47f968f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be6da021ef9b75ee413057e4f1b287c240394902")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameShelf.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameShelf.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

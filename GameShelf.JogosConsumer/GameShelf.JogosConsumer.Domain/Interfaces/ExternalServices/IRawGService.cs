@@ -7,7 +7,7 @@ namespace GameShelf.JogosConsumer.Domain.Interfaces.ExternalServices
     {
 
         [Get("/games")]
-        Task<RawGListGamesResultProjection> GetGames([Query] RawGGetGamesFilterProjection query);
+        Task<ApiResponse<RawGListGamesResultProjection>> GetGames([Query] RawGGetGamesFilterProjection query);
 
     }
 }

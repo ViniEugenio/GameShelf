@@ -166,7 +166,6 @@ namespace GameShelf.Infrastructure.Migrations
                         .HasColumnType("varchar(MAX)");
 
                     b.Property<string>("Imagem")
-                        .IsRequired()
                         .HasColumnType("varchar(MAX)");
 
                     b.Property<string>("Nome")

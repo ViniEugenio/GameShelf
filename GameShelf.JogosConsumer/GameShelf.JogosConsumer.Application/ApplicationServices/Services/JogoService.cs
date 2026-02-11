@@ -5,7 +5,9 @@ using GameShelf.JogosConsumer.Domain.Entities;
 using GameShelf.JogosConsumer.Domain.Interfaces.ExternalServices;
 using GameShelf.JogosConsumer.Domain.Interfaces.Repositories;
 using GameShelf.JogosConsumer.Domain.Projections.RawG;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Refit;
 
 namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
 {
@@ -16,7 +18,8 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
         IGeneroService generoService,
         IPlataformaService plataformaService,
         IJogoGeneroService jogoGeneroService,
-        IJogoPlataformaService jogoPlataformaService) : IJogoService
+        IJogoPlataformaService jogoPlataformaService,
+        ILogger<JogoService> logger) : IJogoService
     {
 
         private readonly IRawGService _rawGService = rawGService;
@@ -26,6 +29,7 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
         private readonly IPlataformaService _plataformaService = plataformaService;
         private readonly IJogoGeneroService _jogoGeneroService = jogoGeneroService;
         private readonly IJogoPlataformaService _jogoPlataformaService = jogoPlataformaService;
+        private readonly ILogger<JogoService> _logger = logger;
 
         private readonly List<AtualizarJogosAuxiliarDTO> _generosAuxiliar = [];
         private readonly List<AtualizarJogosAuxiliarDTO> _plataformasAuxiliar = [];
@@ -33,31 +37,60 @@ namespace GameShelf.JogosConsumer.Application.ApplicationServices.Services
         public async Task AtualizarJogos()
         {
 
-            int paginaAtual = 0;
+            _logger.LogInformation("Iniciando de sincronização de jogos!");
+
+            int paginaAtual = 1;
             int quantidadeJogosPorPagina = 40;
 
-            RawGListGamesResultProjection gamesResult = await _rawGService
-                .GetGames(new RawGGetGamesFilterProjection(_rawGConfiguration.Key, paginaAtual + 1, quantidadeJogosPorPagina));
+            ApiResponse<RawGListGamesResultProjection> gamesResult = await _rawGService
+                .GetGames(new RawGGetGamesFilterProjection(_rawGConfiguration.Key, paginaAtual, quantidadeJogosPorPagina));
 
-            if (gamesResult.Games.Count == 0)
+            bool requisicaoRealizadaComSucesso = gamesResult.IsSuccessStatusCode
+                && gamesResult.Content.Games.Count > 0;
+
+            if (!requisicaoRealizadaComSucesso)
             {
+
+                _logger.LogInformation("Erro na requisição a API {StatusCode}!", gamesResult.StatusCode);
                 return;
+
             }
 
-            int quantidadePaginas = (int)Math.Ceiling((float)gamesResult.QuantidadeTotalDeJogos / quantidadeJogosPorPagina);
+            _logger.LogInformation("Quantidade de jogos: {QuantidadeTotalDeJogos}", gamesResult.Content.QuantidadeTotalDeJogos);
+
+            int quantidadePaginas = (int)Math.Ceiling((float)gamesResult.Content.QuantidadeTotalDeJogos / quantidadeJogosPorPagina);
 
             while (paginaAtual < quantidadePaginas)
             {
 
+                await AtualizarListagemAuxilarGeneros(gamesResult.Content);
+                await AtualizarListagemAuxiliarPlataformas(gamesResult.Content);
+                await CadastrarNovosJogos(gamesResult.Content);
+
+                float porcentagemSincronia = MathF.Round((float)paginaAtual / quantidadePaginas * 100, 4);
+
+                _logger.LogInformation("Sincronia em {Porcentagem}", porcentagemSincronia);
+
                 paginaAtual++;
 
-                await AtualizarListagemAuxilarGeneros(gamesResult);
-                await AtualizarListagemAuxiliarPlataformas(gamesResult);
-                await CadastrarNovosJogos(gamesResult);
+                int tempoEsperaRealizarNovaRequisicao = 30;
+                await Task.Delay(TimeSpan.FromSeconds(tempoEsperaRealizarNovaRequisicao));
+
+                gamesResult = await _rawGService
+                    .GetGames(new RawGGetGamesFilterProjection(_rawGConfiguration.Key, paginaAtual, quantidadeJogosPorPagina));
+
+                requisicaoRealizadaComSucesso = gamesResult.IsSuccessStatusCode
+                    && gamesResult.Content.Games.Count > 0;
+
+                if (!requisicaoRealizadaComSucesso)
+                {
+
+                    _logger.LogInformation("Erro na requisição a API {StatusCode}!", gamesResult.StatusCode);
+                    break;
+
+                }
 
             }
-
-            await _jogoRepository.SaveChanges();
 
         }
 

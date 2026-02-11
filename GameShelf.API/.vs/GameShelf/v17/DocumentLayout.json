@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "D:\\reps\\GameShelf\\GameShelf.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\persistence\\mappings\\generomap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\persistence\\mappings\\generomap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{74145C47-E2A5-4A9A-9DB2-AECC4D34828F}|GameShelf.Domain\\GameShelf.Domain.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.domain\\entities\\outbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74145C47-E2A5-4A9A-9DB2-AECC4D34828F}|GameShelf.Domain\\GameShelf.Domain.csproj|solutionrelative:gameshelf.domain\\entities\\outbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|d:\\reps\\gameshelf\\gameshelf.api\\gameshelf.infrastructure\\persistence\\mappings\\outboxmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{756F1B05-7D44-4E42-B193-21C15F1CAE56}|GameShelf.Infrastructure\\GameShelf.Infrastructure.csproj|solutionrelative:gameshelf.infrastructure\\persistence\\mappings\\outboxmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,14 +31,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GeneroMap.cs",
-              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Mappings\\GeneroMap.cs",
-              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Persistence\\Mappings\\GeneroMap.cs",
-              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Mappings\\GeneroMap.cs",
-              "RelativeToolTip": "GameShelf.Infrastructure\\Persistence\\Mappings\\GeneroMap.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Title": "Outbox.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Domain\\Entities\\Outbox.cs",
+              "RelativeDocumentMoniker": "GameShelf.Domain\\Entities\\Outbox.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Domain\\Entities\\Outbox.cs",
+              "RelativeToolTip": "GameShelf.Domain\\Entities\\Outbox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T01:47:22.884Z",
+              "WhenOpened": "2026-02-11T00:38:38.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OutboxMap.cs",
+              "DocumentMoniker": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Mappings\\OutboxMap.cs",
+              "RelativeDocumentMoniker": "GameShelf.Infrastructure\\Persistence\\Mappings\\OutboxMap.cs",
+              "ToolTip": "D:\\reps\\GameShelf\\GameShelf.API\\GameShelf.Infrastructure\\Persistence\\Mappings\\OutboxMap.cs",
+              "RelativeToolTip": "GameShelf.Infrastructure\\Persistence\\Mappings\\OutboxMap.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T00:38:28.193Z",
               "EditorCaption": ""
             }
           ]

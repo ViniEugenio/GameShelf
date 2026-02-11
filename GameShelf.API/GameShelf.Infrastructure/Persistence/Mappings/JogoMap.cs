@@ -23,7 +23,6 @@ namespace GameShelf.Infrastructure.Persistence.Mappings
 
             builder
                 .Property(jogo => jogo.Imagem)
-                .IsRequired()
                 .HasColumnType("varchar(MAX)");
 
         }
